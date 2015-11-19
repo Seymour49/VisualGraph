@@ -15,6 +15,8 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainvisualgraph.cpp
 
-HEADERS  += mainvisualgraph.h
+HEADERS += model/sommet.h \
+        model/grapheMat.h \
+        mainvisualgraph.h
 
 FORMS    += mainvisualgraph.ui
