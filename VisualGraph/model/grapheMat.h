@@ -5,8 +5,10 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include <fstream>
+#include <sstream>
 
-#include "sommet.h"
+#include "sommetMat.h"
 
 using namespace std;
 /*
@@ -22,10 +24,20 @@ private:
   string name;
   int NbSommets;
   int NbArcs;
-  vector<Sommet> sommets;
+  vector<SommetMat> sommets;
   
 public:
   GrapheMat(string s):name(s){}
+  GrapheMat(const GrapheMat& g):name(g.name),NbSommets(g.NbSommets),NbArcs(g.NbArcs){
+      for(unsigned int i=0; i< g.sommets.size();++i){
+	  sommets.push_back(g.sommets.at(i));
+      }
+  }
+  
+  ~GrapheMat(){
+      sommets.clear();
+  }
+  
   
   vector< string >& explode(const string& str)
   {
@@ -54,7 +66,7 @@ public:
     
     void initSommets(){
 	for(int i=0; i<= NbSommets;++i){
-	    Sommet s(i);
+	    SommetMat s(i);
 	    for(int j=0; j<=NbSommets;++j){
 	      // Initialisation du vecteur d'adjacents
 		s.valueInit(false);
@@ -92,7 +104,7 @@ public:
 		    initSommets();
 		    
 		}else{
-		    vector<string>tokens = explode(line);
+		    vector<string>& tokens = explode(line);
 		    /* tokens[0] : caractère de controle
 		     * tokens[1] : id du sommet source
 		     * tokens[2] : id du sommet destination
@@ -105,6 +117,7 @@ public:
 			sommets.at(dest).updateArc(src);			
 			
 		    }
+		    delete(&tokens);
 		}
 	    }    
 	}
