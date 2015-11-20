@@ -14,7 +14,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainvisualgraph.cpp \
-    model/mainT.cpp
 
 HEADERS += \
         model/grapheMat.h \
