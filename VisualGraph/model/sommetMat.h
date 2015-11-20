@@ -21,7 +21,7 @@ public:
   ~SommetMat(){
       adjacents.clear();    
   }
-  const int get_id(){ return id; };
+  int get_id() const { return id; };
   vector<bool>& get_adjacents(){ return adjacents; };
   
   void valueInit(bool x){
