@@ -1,24 +1,26 @@
-#ifndef SOMMET_H
-#define SOMMET_H
+#ifndef SOMMETMAT_H
+#define SOMMETMAT_H
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <iterator>
-#include <boost/iterator/iterator_concepts.hpp>
+#include <cstdlib>
 
 using namespace std;
 
-class Sommet {
+class SommetMat {
 private:
     int id;
     vector<bool>adjacents;
     
 public:
-  Sommet(int x):id(x){
-    
+  SommetMat(int x):id(x){
   }
   
+  ~SommetMat(){
+      adjacents.clear();    
+  }
   const int get_id(){ return id; };
   vector<bool>& get_adjacents(){ return adjacents; };
   
@@ -31,7 +33,7 @@ public:
 	out << "Sommet " << id << " : " ;
 	
 	for(unsigned int i=1;i<adjacents.size();++i){
-		    out << adjacents.at(i) << ";";
+		    out << adjacents.at(i) /*<< ";"*/;
 	}
 	out << endl;
 	
@@ -40,7 +42,7 @@ public:
     }
     
     
-    friend ostream& operator<<(ostream& out, Sommet& r){
+    friend ostream& operator<<(ostream& out, SommetMat& r){
 	return r.print(out);
     }
   
