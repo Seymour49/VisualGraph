@@ -2,6 +2,7 @@
 #define MAINVISUALGRAPH_H
 
 #include <QMainWindow>
+#include "./model/grapheMat.h"
 
 namespace Ui {
 class MainVisualGraph;
@@ -17,6 +18,9 @@ public:
 
 private:
     Ui::MainVisualGraph *ui;
+
+public slots:
+    void launchProcess();
 };
 
 #endif // MAINVISUALGRAPH_H
