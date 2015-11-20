@@ -2,7 +2,7 @@
 #define MAINVISUALGRAPH_H
 
 #include <QMainWindow>
-#include "./model/grapheMat.h"
+#include "./model/graphemat.h"
 
 namespace Ui {
 class MainVisualGraph;

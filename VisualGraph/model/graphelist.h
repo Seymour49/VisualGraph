@@ -19,10 +19,7 @@ private:
     list<SommetList> sommets;
 
 public:
-    GrapheList(string s):name(s){
-    }
-
-
+    GrapheList(string s);
 
 };
 

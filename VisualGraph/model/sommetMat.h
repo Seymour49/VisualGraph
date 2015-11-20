@@ -7,52 +7,39 @@
 #include <iterator>
 #include <cstdlib>
 
-using namespace std;
-
 class SommetMat {
 private:
     int id;
-    vector<bool>adjacents;
+    std::vector<bool>adjacents;
     
 public:
-  SommetMat(int x):id(x){
-  }
-  
-  ~SommetMat(){
-      adjacents.clear();    
-  }
-  int get_id() const { return id; };
-  vector<bool>& get_adjacents(){ return adjacents; };
+  SommetMat(int x);
+  virtual ~SommetMat();
+
+  int get_id() const { return id; }
+  std::vector<bool>& get_adjacents(){ return adjacents; }
   
   void valueInit(bool x){
       adjacents.push_back(x);
    }
-  
-   ostream& print(ostream& out){
-	
-	out << "Sommet " << id << " : " ;
-	
-	for(unsigned int i=1;i<adjacents.size();++i){
-		    out << adjacents.at(i) /*<< ";"*/;
-	}
-	out << endl;
-	
-	
-	return out;
-    }
+
+  std::ostream& print(std::ostream& out);
     
-    
-    friend ostream& operator<<(ostream& out, SommetMat& r){
-	return r.print(out);
-    }
+   friend std::ostream& operator<<(std::ostream& out, SommetMat& r){
+        return r.print(out);
+   }
   
-  void updateArc(int id){
-      adjacents.at(id) = true;
-  }
+  /**
+   * Définit un autre sommet comme étant adjacent
+   * @param id numéro de l'autre sommet
+   */
+  void updateArc(int id){ adjacents.at(id) = true; }
   
-  bool isArc(int id){
-      return adjacents.at(id);
-  }
+  /**
+   * Vérifie qu'il y a un arc entre le sommet et un autre sommet
+   * @param id numéro de l'autre sommet
+   */
+  bool isArc(int id){ return adjacents.at(id); }
   
 };
 #endif

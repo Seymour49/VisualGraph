@@ -5,6 +5,7 @@
 #include <string>
 #include <iterator>
 #include <cstdlib>
+#include <list>
 
 using namespace std;
 
@@ -14,27 +15,18 @@ private:
     list<SommetList *> adjacents;
 
 public:
-    SommetList(int x):id(x),adjacents(null){
-    }
+    SommetList(int x);
 
-    ~SommetList(){
-        adjacents.clear();
-    }
-    const int get_id(){ return id; };
+    virtual ~SommetList();
+
+    int get_id() const { return id; }
+    
+    /**
+     * Retourne les sommets adjacents au sommet "this"
+     */
     list<SommetList*>& get_adjacents(){ return adjacents; };
 
-     ostream& print(ostream& out){
-
-      out << "Sommet " << id << " : " ;
-
-      for(list<Sommet *>::iterator it = adjacents.begin();it != adjacents.end();++it){
-              out << (*it).get_id() << ";";
-      }
-      out << endl;
-
-
-      return out;
-      }
+    ostream& print(ostream& out);
 
 
       friend ostream& operator<<(ostream& out, SommetList& s){

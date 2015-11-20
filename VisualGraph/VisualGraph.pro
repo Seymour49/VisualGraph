@@ -13,12 +13,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainvisualgraph.cpp \
+    mainvisualgraph.cpp \
+    #model/mainT.cpp \
+    model/sommetMat.cpp \
+    model/graphemat.cpp \
+    model/sommetlist.cpp \
+    model/graphelist.cpp
 
 HEADERS += \
-        model/grapheMat.h \
-        mainvisualgraph.h \
+    mainvisualgraph.h \
     model/sommetMat.h \
+    model/graphemat.h \
     model/sommetlist.h \
     model/graphelist.h
 

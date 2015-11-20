@@ -13,15 +13,15 @@ MainVisualGraph::~MainVisualGraph()
     delete ui;
 }
 
-void MainVisualGraph::launchProcess(){
 
+void MainVisualGraph::launchProcess(){
     GrapheMat* g = new GrapheMat("Test");
 
-    if(g->tryLoadFile("dummy.txt")){
-        cout <<(*g) << endl;
+    if(g->tryLoadFile("../VisualGraph/model/testGraphe25.txt")){
+        std::cout <<(*g) << std::endl;
     }
     else{
-        cout << "Erreur de fichier" << endl;
+        std::cout << "Erreur de fichier" << std::endl;
     }
     delete(g);
 }
