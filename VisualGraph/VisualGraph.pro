@@ -15,17 +15,18 @@ DEPENDPATH += . model
 INCLUDEPATH += . model
 
 SOURCES += main.cpp\
-    mainvisualgraph.cpp \
     model/sommetMat.cpp \
     model/graphemat.cpp \
     model/sommetlist.cpp \
-    model/graphelist.cpp
+    model/graphelist.cpp \
+    loadgraphe.cpp
 
 HEADERS += \
-    mainvisualgraph.h \
     model/sommetMat.h \
     model/graphemat.h \
     model/sommetlist.h \
-    model/graphelist.h
+    model/graphelist.h \
+    loadgraphe.h
 
-FORMS    += mainvisualgraph.ui
+FORMS    += \
+    loadgraphe.ui

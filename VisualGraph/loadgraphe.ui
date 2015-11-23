@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainVisualGraph</class>
- <widget class="QMainWindow" name="MainVisualGraph">
+ <class>LoadGraph</class>
+ <widget class="QMainWindow" name="LoadGraph">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainVisualGraph</string>
+   <string>Load a Graph</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="testBtn">
@@ -56,7 +56,10 @@
      </rect>
     </property>
     <property name="text">
-     <string extracomment="Ecrire"/>
+     <string/>
+    </property>
+    <property name="cursorPosition">
+     <number>0</number>
     </property>
    </widget>
    <widget class="QToolButton" name="toolButton">
@@ -114,7 +117,7 @@
   <connection>
    <sender>testBtn</sender>
    <signal>clicked()</signal>
-   <receiver>MainVisualGraph</receiver>
+   <receiver>LoadGraph</receiver>
    <slot>launchProcess()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -130,7 +133,7 @@
   <connection>
    <sender>toolButton</sender>
    <signal>clicked()</signal>
-   <receiver>MainVisualGraph</receiver>
+   <receiver>LoadGraph</receiver>
    <slot>loadFile()</slot>
    <hints>
     <hint type="sourcelabel">

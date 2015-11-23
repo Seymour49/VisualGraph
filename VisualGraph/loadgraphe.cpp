@@ -1,24 +1,24 @@
-#include "mainvisualgraph.h"
-#include "ui_mainvisualgraph.h"
+#include "loadgraphe.h"
+#include "ui_loadgraphe.h"
 
-MainVisualGraph::MainVisualGraph(QWidget *parent) :
+LoadGraph::LoadGraph(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainVisualGraph)
+    ui(new Ui::LoadGraph)
 {
     ui->setupUi(this);
 }
 
-MainVisualGraph::~MainVisualGraph()
+LoadGraph::~LoadGraph()
 {
     delete ui;
 }
 
 
-void MainVisualGraph::setFileDirectory(QString filename){
+void LoadGraph::setFileDirectory(QString filename){
     ui->filenameLineEdit->setText(filename);
 }
 
-void MainVisualGraph::launchProcess(){
+void LoadGraph::launchProcess(){
     GrapheMat* g = new GrapheMat("Test");
 
     if(g->tryLoadFile(QString(ui->filenameLineEdit->text()).toStdString())){
@@ -30,7 +30,7 @@ void MainVisualGraph::launchProcess(){
     delete(g);
 }
 
-bool MainVisualGraph::loadFile(){
+bool LoadGraph::loadFile(){
     QFileDialog loader(this, "Ouverture d'une clique", "./");
     loader.setDirectory("../../VisualGraph/VisualGraph/model");
 

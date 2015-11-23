@@ -1,5 +1,5 @@
-#ifndef MAINVISUALGRAPH_H
-#define MAINVISUALGRAPH_H
+#ifndef LOADGRAPH_H
+#define LOADGRAPH_H
 
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QFileDialog>
@@ -7,19 +7,19 @@
 #include "./model/graphemat.h"
 
 namespace Ui {
-class MainVisualGraph;
+class LoadGraph;
 }
 
-class MainVisualGraph : public QMainWindow
+class LoadGraph : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainVisualGraph(QWidget *parent = 0);
-    ~MainVisualGraph();
+    explicit LoadGraph(QWidget *parent = 0);
+    ~LoadGraph();
 
 private:
-    Ui::MainVisualGraph *ui;
+    Ui::LoadGraph *ui;
 
     void setFileDirectory(QString filename);
 
@@ -28,4 +28,4 @@ public slots:
     bool loadFile();
 };
 
-#endif // MAINVISUALGRAPH_H
+#endif // LOADGRAPH_H
