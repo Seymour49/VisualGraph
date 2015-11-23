@@ -32,6 +32,7 @@ void MainVisualGraph::launchProcess(){
 
 bool MainVisualGraph::loadFile(){
     QFileDialog loader(this, "Ouverture d'une clique", "./");
+    loader.setDirectory("../../VisualGraph/VisualGraph/model");
 
     loader.show();
     if (loader.exec()){

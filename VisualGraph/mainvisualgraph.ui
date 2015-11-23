@@ -56,7 +56,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Entrez le nom du fichier</string>
+     <string extracomment="Ecrire"/>
     </property>
    </widget>
    <widget class="QToolButton" name="toolButton">

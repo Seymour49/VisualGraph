@@ -11,9 +11,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = VisualGraph
 TEMPLATE = app
 
+DEPENDPATH += . model
+INCLUDEPATH += . model
 
 SOURCES += main.cpp\
-    #model/mainT.cpp \
     mainvisualgraph.cpp \
     model/sommetMat.cpp \
     model/graphemat.cpp \
