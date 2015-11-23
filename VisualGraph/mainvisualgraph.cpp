@@ -15,13 +15,13 @@ MainVisualGraph::~MainVisualGraph()
 
 
 void MainVisualGraph::setFileDirectory(QString filename){
-    ui->filenameLineEdit->setText("../VisualGraph/model/"+filename);
+    ui->filenameLineEdit->setText(filename);
 }
 
 void MainVisualGraph::launchProcess(){
     GrapheMat* g = new GrapheMat("Test");
 
-    if(g->tryLoadFile(QString(+ui->filenameLineEdit->text()).toStdString())){
+    if(g->tryLoadFile(QString(ui->filenameLineEdit->text()).toStdString())){
         std::cout <<(*g) << std::endl;
     }
     else{
