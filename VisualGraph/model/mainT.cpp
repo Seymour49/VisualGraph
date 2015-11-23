@@ -1,4 +1,4 @@
-#include "grapheMat.h"
+#include "graphemat.h"
 
 using namespace std;
 

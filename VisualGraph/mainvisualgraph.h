@@ -1,7 +1,9 @@
 #ifndef MAINVISUALGRAPH_H
 #define MAINVISUALGRAPH_H
 
-#include <QMainWindow>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QFileDialog>
+
 #include "./model/graphemat.h"
 
 namespace Ui {
@@ -19,8 +21,11 @@ public:
 private:
     Ui::MainVisualGraph *ui;
 
+    void setFileDirectory(QString filename);
+
 public slots:
     void launchProcess();
+    bool loadFile();
 };
 
 #endif // MAINVISUALGRAPH_H

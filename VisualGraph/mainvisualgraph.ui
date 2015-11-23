@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>409</width>
+    <height>228</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,27 +17,59 @@
    <widget class="QPushButton" name="testBtn">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>210</y>
+      <x>150</x>
+      <y>110</y>
       <width>85</width>
       <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>Test</string>
+     <string>Lancer</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="filenameLbl">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>210</y>
-      <width>59</width>
+      <x>120</x>
+      <y>30</y>
+      <width>151</width>
       <height>17</height>
      </rect>
     </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
     <property name="text">
-     <string>c'est moi</string>
+     <string>Entrer le nom du fichier</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="filenameLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>70</y>
+      <width>151</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Entrez le nom du fichier</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>70</y>
+      <width>81</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Browse...</string>
     </property>
    </widget>
   </widget>
@@ -46,7 +78,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>409</width>
      <height>27</height>
     </rect>
    </property>
@@ -86,8 +118,8 @@
    <slot>launchProcess()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>20</x>
-     <y>266</y>
+     <x>170</x>
+     <y>176</y>
     </hint>
     <hint type="destinationlabel">
      <x>23</x>
@@ -95,8 +127,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>toolButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainVisualGraph</receiver>
+   <slot>loadFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>297</x>
+     <y>210</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>launchProcess()</slot>
+  <slot>loadFile()</slot>
  </slots>
 </ui>

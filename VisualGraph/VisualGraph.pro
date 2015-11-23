@@ -13,8 +13,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    mainvisualgraph.cpp \
     #model/mainT.cpp \
+    mainvisualgraph.cpp \
     model/sommetMat.cpp \
     model/graphemat.cpp \
     model/sommetlist.cpp \
