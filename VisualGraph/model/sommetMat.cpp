@@ -2,7 +2,10 @@
 
 using namespace std;
 
-SommetMat::SommetMat(int x):id(x){}
+SommetMat::SommetMat(int x, size_t nb_sommets):id(x)
+{
+    adjacents.resize(nb_sommets+1, false);
+}
 
 ostream& SommetMat::print(ostream& out)
 {

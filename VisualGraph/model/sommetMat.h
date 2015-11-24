@@ -10,18 +10,18 @@
 class SommetMat {
 private:
     int id;
-    std::vector<bool>adjacents;
+    std::vector<bool> adjacents;
     
 public:
-  SommetMat(int x);
+  SommetMat(int x, size_t nb_sommets);
   virtual ~SommetMat();
 
   int get_id() const { return id; }
   std::vector<bool>& get_adjacents(){ return adjacents; }
   
-  void valueInit(bool x){
-      adjacents.push_back(x);
-   }
+//  void valueInit(bool x){
+//      adjacents.push_back(x);
+//   }
 
   std::ostream& print(std::ostream& out);
     

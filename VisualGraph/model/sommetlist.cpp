@@ -1,8 +1,8 @@
 #include "sommetlist.h"
 
-// SommetList::SommetList(int x):id(x),adjacents() {
-// 
-// }
+ SommetList::SommetList(int x):id(x) {
+
+ }
 
 
 ostream& SommetList::print(ostream& out)

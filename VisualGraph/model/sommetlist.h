@@ -10,9 +10,11 @@
 using namespace std;
 
 class SommetList {
+    typedef list<SommetList *> ListSommets;
+
 private:
     int id;
-    list<SommetList *> adjacents;
+    ListSommets adjacents;
 
 public:
     SommetList(int x);
@@ -24,7 +26,7 @@ public:
     /**
      * Retourne les sommets adjacents au sommet "this"
      */
-    list<SommetList*>& get_adjacents(){ return adjacents; };
+    ListSommets& get_adjacents(){ return adjacents; }
 
     ostream& print(ostream& out);
 

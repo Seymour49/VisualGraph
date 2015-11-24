@@ -7,7 +7,7 @@ GrapheMat::GrapheMat(string s):name(s)
 
 GrapheMat::GrapheMat(const GrapheMat& g):name(g.name),NbSommets(g.NbSommets),NbArcs(g.NbArcs){
     for(unsigned int i=0; i< g.sommets.size();++i){
-	sommets.push_back(g.sommets.at(i));
+        sommets.push_back(g.sommets[i]);
     }
 }
 
@@ -41,12 +41,12 @@ ostream& GrapheMat::print(ostream& out)
 void GrapheMat::initSommets()
 {
     for(int i=0; i<= NbSommets;++i){
-	SommetMat s(i);
-	for(int j=0; j<=NbSommets;++j){
-	    // Initialisation du vecteur d'adjacents
-	    s.valueInit(false);
-	}
-	sommets.push_back(s);
+        SommetMat s(i, size_t(NbSommets));
+//        for(int j=0; j<=NbSommets;++j){
+//            // Initialisation du vecteur d'adjacents
+//            s.valueInit(false);
+//        }
+        sommets.push_back(s);
     }
 	
 }
