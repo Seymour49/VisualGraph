@@ -40,6 +40,10 @@ public:
    * @param id numéro de l'autre sommet
    */
   bool isArc(int id){ return adjacents.at(id); }
-  
+
+  /**
+   * Fonction retournant le nombre de voisins du sommet
+   */
+  int nbVoisins();
 };
 #endif

@@ -22,3 +22,14 @@ ostream& SommetMat::print(ostream& out)
 SommetMat::~SommetMat(){
     adjacents.clear();
 }
+
+int SommetMat::nbVoisins(){
+    int res = 0;
+    for(unsigned int i=1;i<adjacents.size();++i){
+        if(isArc(i)){
+            ++res;
+        }
+    }
+
+    return res;
+}

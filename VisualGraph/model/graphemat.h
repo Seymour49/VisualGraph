@@ -44,11 +44,15 @@ public:
     
     void initSommets();
     
-    /*
+    /**
     * Fonction de chargement d'un graphe sous forme de matrice
     */
     bool tryLoadFile(const std::string& fileName);
   
+    /**
+      * Fonction de calcul de la complétude du Graphe
+      */
+    bool isComplete();
 };
 
 #endif

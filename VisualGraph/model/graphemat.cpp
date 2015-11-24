@@ -117,3 +117,14 @@ bool GrapheMat::tryLoadFile(const string& fileName)
     return true;
     
 }
+
+bool GrapheMat::isComplete() {
+
+    for(int i=1; i<NbSommets;++i){
+    if(sommets[i].nbVoisins() != (NbSommets -1))
+        return false;
+    }
+
+    return true;
+
+}
