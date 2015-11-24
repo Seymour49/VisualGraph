@@ -39,6 +39,7 @@ public:
     
     friend std::ostream& operator<<(std::ostream& out, GrapheMat& r){
 	return r.print(out);
+
     }
     
     void initSommets();

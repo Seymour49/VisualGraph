@@ -2,6 +2,9 @@
 
 using namespace std;
 
+/*
+ * Constructeurs et destructeur
+ */
 GrapheMat::GrapheMat(string s):name(s)
 {}
 
@@ -17,6 +20,10 @@ GrapheMat::~GrapheMat()
     sommets.clear();
 }
 
+/*
+ * Fonction permettant de découper une ligne du fichier
+ * et d'en récupérer chaque élément.
+ */
 vector< string >& GrapheMat::explode(const string& str)
 {
     istringstream split(str);
@@ -27,6 +34,9 @@ vector< string >& GrapheMat::explode(const string& str)
     return *tokens;
 }
 
+/*
+ * Fonction d'affichage en mode terminal
+ */
 ostream& GrapheMat::print(ostream& out)
 {
     out << "Graphe : " << name << endl;
@@ -38,6 +48,11 @@ ostream& GrapheMat::print(ostream& out)
     return out;
 }
 
+
+/*
+ * Fonction d'initialisation d'un graphe
+ *
+ */
 void GrapheMat::initSommets()
 {
     for(int i=0; i<= NbSommets;++i){
@@ -51,6 +66,11 @@ void GrapheMat::initSommets()
 	
 }
 
+
+/*
+ * fonction de chargement d'un graphe à partir
+ * d'un fichier d'exemple
+ */
 bool GrapheMat::tryLoadFile(const string& fileName)
 {
     ifstream f(fileName.c_str());
