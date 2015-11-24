@@ -55,7 +55,8 @@ ostream& GrapheMat::print(ostream& out)
  */
 void GrapheMat::initSommets()
 {
-    for(int i=0; i<= NbSommets;++i){
+    sommets.push_back(SommetMat(0, 0));
+    for(int i=1; i<= NbSommets;++i){
         SommetMat s(i, size_t(NbSommets));
 //        for(int j=0; j<=NbSommets;++j){
 //            // Initialisation du vecteur d'adjacents
