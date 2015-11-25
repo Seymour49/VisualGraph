@@ -18,6 +18,7 @@
  * 
  */
 
+
 class GrapheMat {
 private:
   std::string name;
@@ -26,29 +27,44 @@ private:
   std::vector<SommetMat> sommets;
   
 public:
-  GrapheMat(std::string s);
-  GrapheMat(const GrapheMat& g);
-  
-  virtual ~GrapheMat();
-  
-  
-  std::vector< std::string >& explode(const std::string& str);
-  
-  std::ostream& print(std::ostream& out);
-    
-    
-    friend std::ostream& operator<<(std::ostream& out, GrapheMat& r){
-	return r.print(out);
+//  CONSTRUCTEURS ET DESTRUCTORS
+    GrapheMat(std::string s);
+    GrapheMat(const GrapheMat& g);
 
-    }
-    
-    void initSommets();
-    
+    virtual ~GrapheMat();
+
+//  AFFICHAGES
     /**
-    * Fonction de chargement d'un graphe sous forme de matrice
-    */
+     * Découpe une ligne du fichier et récupère chaque élément.
+     * @param str chaine en entrée à découper
+     * @return vecteur de chaine ... TODO UGO comment
+     */
+    std::vector< std::string >& explode(const std::string& str);
+
+    /**
+     * Impression sur un flux du graphe
+     * @param out
+     * @return le flux donné en paramètre avec le graphe 'imprimé'
+     */
+    std::ostream& print(std::ostream& out);
+
+    friend std::ostream& operator<<(std::ostream& out, GrapheMat& r)
+    { return r.print(out); }
+
+//  AUTRES
+    /**
+     * Fonction d'initialisation d'un graphe
+     */
+    void initSommets();
+
+    /**
+     * Chargement d'un graphe sous forme de matrice
+     * à partir d'un fichier d'exemple
+     * @param fileName
+     * @return
+     */
     bool tryLoadFile(const std::string& fileName);
-  
+
     /**
       * Fonction de calcul de la complétude du Graphe
       */

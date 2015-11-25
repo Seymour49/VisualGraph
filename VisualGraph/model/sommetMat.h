@@ -15,16 +15,26 @@ private:
 public:
   SommetMat(int x, size_t nb_sommets);
   virtual ~SommetMat();
-
+  /**
+   * @brief get_id
+   * @return
+   */
   int get_id() const { return id; }
   std::vector<bool>& get_adjacents(){ return adjacents; }
-  
-//  void valueInit(bool x){
-//      adjacents.push_back(x);
-//   }
 
+  /**
+   * @brief print
+   * @param out
+   * @return
+   */
   std::ostream& print(std::ostream& out);
     
+  /**
+    * @brief operator <<  redéfinie l'opérateur de sortie sur flux
+    * @param out
+    * @param r
+    * @return
+    */
    friend std::ostream& operator<<(std::ostream& out, SommetMat& r){
         return r.print(out);
    }
@@ -42,7 +52,7 @@ public:
   bool isArc(int id){ return adjacents.at(id); }
 
   /**
-   * Fonction retournant le nombre de voisins du sommet
+   * Retournant le nombre de voisins du sommet
    */
   int nbVoisins();
 };
