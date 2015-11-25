@@ -31,9 +31,9 @@ public:
     
   /**
     * @brief operator <<  redéfinie l'opérateur de sortie sur flux
-    * @param out
-    * @param r
-    * @return
+    * @param out flux de sortie sur lequel imprimer le sommet
+    * @param r sommet à afficher
+    * @return flux de sortie
     */
    friend std::ostream& operator<<(std::ostream& out, SommetMat& r){
         return r.print(out);
@@ -48,11 +48,13 @@ public:
   /**
    * Vérifie qu'il y a un arc entre le sommet et un autre sommet
    * @param id numéro de l'autre sommet
+   * @return vrai si il y a un arc entre le sommet et l'autre sommet
    */
   bool isArc(int id){ return adjacents.at(id); }
 
   /**
    * Retournant le nombre de voisins du sommet
+   * @return nombre de voisins
    */
   int nbVoisins();
 };
