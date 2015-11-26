@@ -1,11 +1,17 @@
 #include "loadgraphe.h"
 #include "ui_loadgraphe.h"
 
+#include <ostream>
+
+using namespace std;
+
 LoadGraph::LoadGraph(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::LoadGraph)
 {
     ui->setupUi(this);
+    ui->grapheArea->hide();
+    ui->graphicView_graphe->hide();
 }
 
 LoadGraph::~LoadGraph()
@@ -22,12 +28,15 @@ void LoadGraph::launchProcess(){
     GrapheMat* g = new GrapheMat("Test");
 
     if(g->tryLoadFile(QString(ui->filenameLineEdit->text()).toStdString())){
-        std::cout <<(*g) << std::endl;
+        ostringstream oss;
+        oss <<(*g) << std::endl;
+        ShowGraph* graph= new ShowGraph();
+        graph->init(g);
+        graph->show();
     }
     else{
-        std::cout << "Erreur de fichier" << std::endl;
+        cout << "Erreur de fichier" << std::endl;
     }
-    delete(g);
 }
 
 bool LoadGraph::loadFile(){

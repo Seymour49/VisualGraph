@@ -5,6 +5,7 @@
 #include <QtWidgets/QFileDialog>
 
 #include "./model/graphemat.h"
+#include "showgraph.h"
 
 namespace Ui {
 class LoadGraph;

@@ -19,19 +19,26 @@
  */
 
 
-class GrapheMat {
+class GrapheMat : public std::vector<SommetMat>{
 private:
   std::string name;
-  int NbSommets;
-  int NbArcs;
-  std::vector<SommetMat> sommets;
-  
+  int nb_sommets;
+  int nb_arcs;
+
 public:
+
 //  CONSTRUCTEURS ET DESTRUCTORS
     GrapheMat(std::string s);
     GrapheMat(const GrapheMat& g);
 
     virtual ~GrapheMat();
+
+//  GETTERS
+    /**
+     * Donne le nombre de sommets du graphe
+     * @return nombre de sommets
+     */
+    int getNbSommets() const {return nb_sommets;}
 
 //  AFFICHAGES
     /**

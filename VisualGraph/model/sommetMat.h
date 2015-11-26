@@ -50,7 +50,7 @@ public:
    * @param id numéro de l'autre sommet
    * @return vrai si il y a un arc entre le sommet et l'autre sommet
    */
-  bool isArc(int id){ return adjacents.at(id); }
+  bool isArc(int id) const{ return adjacents.at(id); }
 
   /**
    * Retournant le nombre de voisins du sommet

@@ -19,15 +19,15 @@ SOURCES += main.cpp\
     model/graphemat.cpp \
     model/sommetlist.cpp \
     model/graphelist.cpp \
-#    moc_mainvisualgraph.cpp \
-    view/loadgraphe.cpp
+    view/loadgraphe.cpp \
+    view/showgraph.cpp
 
-HEADERS += \
-    model/sommetMat.h \
+HEADERS += model/sommetMat.h \
     model/graphemat.h \
     model/sommetlist.h \
     model/graphelist.h \
-    view/loadgraphe.h
+    view/loadgraphe.h \
+    view/showgraph.h
 
-FORMS    += \
-    view/loadgraphe.ui
+FORMS    += view/loadgraphe.ui \
+    view/showgraph.ui

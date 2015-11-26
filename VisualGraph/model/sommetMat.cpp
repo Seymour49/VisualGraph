@@ -15,7 +15,7 @@ ostream& SommetMat::print(ostream& out)
 		    out << adjacents.at(i) /*<< ";"*/;
 	}
 	out << endl;
-	
+
 	return out;
 }
 
