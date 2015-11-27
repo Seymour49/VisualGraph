@@ -50,7 +50,7 @@ public:
      * @param out
      * @return le flux donné en paramètre avec le graphe 'imprimé'
      */
-    std::ostream& print(std::ostream& out);
+    std::ostream& print(std::ostream& out) const;
 
     friend std::ostream& operator<<(std::ostream& out, GrapheMat& r)
     { return r.print(out); }

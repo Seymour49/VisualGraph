@@ -49,6 +49,7 @@ void ShowGraph::redraw(){
     if (bufferPainter->begin(bufferPicture)) cout << "Debut dessin redraw"<< endl;
     else cout << "Impossible dessiner redraw"<< endl;
 
+    bufferPainter->fillRect(0,0, 1,1, QColor(Qt::black));
     for (int i= 1; i< graph->getNbSommets(); ++i){
         // diagonale peinte en gris
         bufferPainter->fillRect(i,i, 1,1, QColor(Qt::gray));
@@ -58,8 +59,8 @@ void ShowGraph::redraw(){
         bufferPainter->fillRect(i,0, 1,1, QColor(Qt::green));
     }
 
-    for (int i= 1; i< graph->getNbSommets()-1; ++i){
-        for (int j= i; j< graph->getNbSommets()-1; ++j){
+    for (int i= 1; i< graph->getNbSommets(); ++i){
+        for (int j= i+1; j< graph->getNbSommets(); ++j){
             if (graph->at(i)->isArc(j)){
                 bufferPainter->fillRect(i, j, 1, 1,QColor(Qt::red));
                 bufferPainter->fillRect(j, i, 1, 1,QColor(Qt::yellow));

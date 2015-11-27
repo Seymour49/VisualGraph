@@ -35,12 +35,12 @@ vector< string >& GrapheMat::explode(const string& str)
     return *tokens;
 }
 
-ostream& GrapheMat::print(ostream& out)
+ostream& GrapheMat::print(ostream& out) const
 {
     out << "Graphe : " << name << endl;
     
     for(unsigned int i=1; i < size();++i){
-    out << at(i) ;
+        out << *(at(i)) ;
     }
     
     return out;
