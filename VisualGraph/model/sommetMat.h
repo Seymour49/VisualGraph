@@ -23,6 +23,15 @@ public:
   std::vector<bool>& get_adjacents(){ return adjacents; }
 
   /**
+   * Fonction de comparaison selon le nombre de sommets adjacents.
+   * @param Sommet a @param Sommet b @return a.nbVoisins() > b.nbVoisins()
+   */
+  static bool neighboorsCompare(const SommetMat*a, const SommetMat*b){
+      return const_cast<SommetMat *>(a)->nbVoisins() > const_cast<SommetMat *>(b)->nbVoisins();
+  }
+
+
+  /**
    * @brief print
    * @param out
    * @return

@@ -58,9 +58,9 @@ void ShowGraph::redraw(){
         bufferPainter->fillRect(i,0, 1,1, QColor(Qt::green));
     }
 
-    for (int i= 1; i< graph->getNbSommets(); ++i){
-        for (int j= i; j< graph->getNbSommets(); ++j){
-            if (graph->at(i).isArc(j)){
+    for (int i= 1; i< graph->getNbSommets()-1; ++i){
+        for (int j= i; j< graph->getNbSommets()-1; ++j){
+            if (graph->at(i)->isArc(j)){
                 bufferPainter->fillRect(i, j, 1, 1,QColor(Qt::red));
                 bufferPainter->fillRect(j, i, 1, 1,QColor(Qt::yellow));
             }

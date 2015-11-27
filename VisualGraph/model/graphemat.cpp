@@ -4,10 +4,10 @@ using namespace std;
 /* ======================================= */
     /* Constructeurs et destructeur */
 /* ======================================= */
-GrapheMat::GrapheMat(string s):vector<SommetMat>(),name(s)
+GrapheMat::GrapheMat(string s):vector<SommetMat *>(),name(s)
 {}
 
-GrapheMat::GrapheMat(const GrapheMat& g):vector<SommetMat>(g), name(g.name),nb_sommets(g.nb_sommets),nb_arcs(g.nb_arcs){
+GrapheMat::GrapheMat(const GrapheMat& g):vector<SommetMat *>(g), name(g.name),nb_sommets(g.nb_sommets),nb_arcs(g.nb_arcs){
 //    for(unsigned int i=0; i< g.size();++i){
 //        push_back(g[i]);
 //    }
@@ -16,6 +16,9 @@ GrapheMat::GrapheMat(const GrapheMat& g):vector<SommetMat>(g), name(g.name),nb_s
 
 GrapheMat::~GrapheMat()
 {
+    for(vector<SommetMat *>::iterator it = this->begin(); it != this->end(); ++it)
+    delete(*it);
+
     this->clear();
 }
 
@@ -45,13 +48,14 @@ ostream& GrapheMat::print(ostream& out)
 
 void GrapheMat::initSommets()
 {
+    SommetMat *s = new SommetMat(0,0);
     //on suppose le sommet 0 n'existe pas
-    push_back(SommetMat(0, 0));
+    push_back(s);
 
     // Initialisation du vecteur d'adjacents à faux (pas d'arcs)
     for(int i=1; i<= nb_sommets;++i){
-        SommetMat s(i, size_t(nb_sommets));
-        push_back(s);
+        SommetMat* tmp = new SommetMat(i, size_t(nb_sommets));
+        push_back(tmp);
     }
 }
 
@@ -89,13 +93,16 @@ bool GrapheMat::tryLoadFile(const string& fileName)
                 // Controle ok, on doit mettre à jour deux arcs (graphe non-orienté)
                 int src = atoi(tokens[1].c_str());
                 int dest = atoi(tokens[2].c_str());
-                this->at(src).updateArc(dest);
-                this->at(dest).updateArc(src);
+                this->at(src)->updateArc(dest);
+                this->at(dest)->updateArc(src);
             }
 
             delete(&tokens);
             }
         }
+
+        // On trie le graphe selon le nombre décroissant de voisins
+        sort(this->begin(), this->end(), SommetMat::neighboorsCompare);
     }
     return true;
     
@@ -104,7 +111,7 @@ bool GrapheMat::tryLoadFile(const string& fileName)
 bool GrapheMat::isComplete() {
 
     for(int i=1; i<nb_sommets;++i){
-    if(at(i).nbVoisins() != (nb_sommets -1))
+    if(at(i)->nbVoisins() != (nb_sommets -1))
         return false;
     }
 

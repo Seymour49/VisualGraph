@@ -1,10 +1,7 @@
 #ifndef GRAPHEMAT_H
 #define GRAPHEMAT_H
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <iterator>
+#include <algorithm>
 #include <fstream>
 #include <sstream>
 
@@ -19,7 +16,7 @@
  */
 
 
-class GrapheMat : public std::vector<SommetMat>{
+class GrapheMat : public std::vector<SommetMat *>{
 private:
   std::string name;
   int nb_sommets;
