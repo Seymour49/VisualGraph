@@ -32,10 +32,16 @@ public:
 
 //  GETTERS
     /**
-     * Donne le nombre de sommets du graphe
+     * @brief getNbSommets
      * @return nombre de sommets
      */
     int getNbSommets() const {return nb_sommets;}
+
+    /**
+     * @brief getName
+     * @return nom du graphe
+     */
+    std::string getName() const {return name;}
 
 //  AFFICHAGES
     /**

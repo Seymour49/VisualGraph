@@ -20,14 +20,16 @@ SOURCES += main.cpp\
     model/sommetlist.cpp \
     model/graphelist.cpp \
     view/loadgraphe.cpp \
-    view/showgraph.cpp
+    view/showgraph.cpp \
+    controller/algographemat.cpp
 
 HEADERS += model/sommetMat.h \
     model/graphemat.h \
     model/sommetlist.h \
     model/graphelist.h \
     view/loadgraphe.h \
-    view/showgraph.h
+    view/showgraph.h \
+    controller/algographemat.h
 
 FORMS    += view/loadgraphe.ui \
     view/showgraph.ui
