@@ -15,17 +15,19 @@ DEPENDPATH += . model
 INCLUDEPATH += . model
 
 SOURCES += main.cpp\
+    model/sommet.cpp \
     model/sommetMat.cpp \
-    model/graphemat.cpp \
     model/sommetlist.cpp \
+    model/graphemat.cpp \
     model/graphelist.cpp \
     model/algographemat.cpp \
     controller/loadgraphe.cpp \
     controller/showgraph.cpp
 
-HEADERS += model/sommetMat.h \
-    model/graphemat.h \
+HEADERS += model/sommet.h \
+    model/sommetMat.h \
     model/sommetlist.h \
+    model/graphemat.h \
     model/graphelist.h \
     model/algographemat.h \
     controller/loadgraphe.h \

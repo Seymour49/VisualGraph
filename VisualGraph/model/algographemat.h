@@ -13,6 +13,14 @@ protected:
 public:
     algoGrapheMat(GrapheMat* g);
     algoGrapheMat(const algoGrapheMat& other);
+
+    /**
+     * Intersection de deux vecteur de pointeurs de SommetMat
+     * @param G1
+     * @param G2
+     * @return l'intersection sous forme d'un vecteur de pointeurs de SommetMat
+     */
+    std::vector<SommetMat*>& intersect(std::vector<SommetMat*>& G1,  std::vector<SommetMat*>& G2);
     
     /**
      * Démarre l'algorithme de recherche de clique Maximum

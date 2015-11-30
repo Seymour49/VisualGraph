@@ -1,16 +1,17 @@
 #include "sommetlist.h"
 
- SommetList::SommetList(int x):id(x) {
+using namespace std;
 
- }
+SommetList::SommetList(int x):Sommet(x)
+{ }
 
 
-ostream& SommetList::print(ostream& out)
+ostream& SommetList::print(ostream& out) const
 {
     out << "Sommet " << id << " : " ;
 
-    for(list<SommetList *>::iterator it = adjacents.begin();it != adjacents.end();++it){
-    out << (*it)->get_id() << ";";
+    for(list<SommetList *>::const_iterator it = adjacents.begin(); it != adjacents.end(); ++it){
+        out << (*it)->get_id() << ";";
     }
     out << std::endl;
 

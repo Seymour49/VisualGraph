@@ -2,14 +2,14 @@
 
 using namespace std;
 
-SommetMat::SommetMat(int x, size_t nb_sommets):id(x)
+SommetMat::SommetMat(int x, size_t nb_sommets):Sommet(x)
 {
     adjacents.resize(nb_sommets+1, false);
 }
 
-ostream& SommetMat::print(ostream& out)
+ostream& SommetMat::print(ostream& out) const
 {
-	out << "Sommet " << id << " : " ;
+    out << "Sommet " << id << " : " ;
 	
 	for(unsigned int i=1;i<adjacents.size();++i){
 		    out << adjacents.at(i) /*<< ";"*/;
@@ -23,7 +23,7 @@ SommetMat::~SommetMat(){
     adjacents.clear();
 }
 
-int SommetMat::nbVoisins(){
+int SommetMat::nbVoisins() const{
     int res = 0;
     for(unsigned int i=1;i<adjacents.size();++i){
         if(isArc(i)){
