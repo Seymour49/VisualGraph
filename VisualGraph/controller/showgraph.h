@@ -6,7 +6,8 @@
 #include <QtGui/QPainter>
 #include <QResizeEvent>
 
-#include "graphemat.h"
+#include "../model/graphemat.h"
+#include "../model/algographemat.h"
 
 namespace Ui {
 class ShowGraph;
@@ -35,6 +36,9 @@ public:
 
 private:
     Ui::ShowGraph *ui;
+
+public slots:
+    void startBronKerbosch() const;
 
 };
 

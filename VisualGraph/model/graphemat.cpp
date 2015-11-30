@@ -102,7 +102,7 @@ bool GrapheMat::tryLoadFile(const string& fileName)
         }
 
         // On trie le graphe selon le nombre décroissant de voisins
-        sort(this->begin(), this->end(), SommetMat::neighboorsCompare);
+//        sort(this->begin(), this->end(), SommetMat::neighboorsCompare);
     }
     return true;
     

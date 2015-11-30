@@ -19,7 +19,7 @@ public:
      * @param G graphe sur lequel on recherche la clique maximum
      * @return vrai si une clique Maximum est trouvée
      */
-    GrapheMat* startBronKerbosch(GrapheMat const* G) const;
+    static GrapheMat* BronKerbosch(GrapheMat const* G);
 
     /**
      * @param G graphe dont on cherche la clique maximale,
@@ -30,7 +30,7 @@ public:
      * @return
      * TODO retirer K des arguements et le mettre en retour de la fonction
      */
-    GrapheMat* maxCliqueBronKerbosch(GrapheMat const* G, GrapheMat* K, std::vector<SommetMat*>& C, std::vector<SommetMat*>& A) const;
+    static GrapheMat* maxCliqueBronKerbosch(GrapheMat const* G, GrapheMat* K, std::vector<SommetMat*>& C, std::vector<SommetMat*>& A);
 };
 
 #endif // ALGOGRAPHEMAT_H

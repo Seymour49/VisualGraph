@@ -94,3 +94,9 @@ void ShowGraph::resizeEvent(QResizeEvent* event)
     cout<<"event->size().width()_ "<<event->size().width()<< " event->size().height()_ "<< event->size().height() << " scaling : "<< scale <<"(qreal)graph->getNbSommets() "<<(qreal)graph->getNbSommets() << endl;
     redraw();
 }
+
+
+void ShowGraph::startBronKerbosch() const
+{
+    algoGrapheMat::BronKerbosch(graph);
+}
