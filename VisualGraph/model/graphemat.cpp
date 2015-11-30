@@ -111,7 +111,7 @@ bool GrapheMat::tryLoadFile(const string& fileName)
 bool GrapheMat::isComplete() {
 
     for(int i=1; i<nb_sommets;++i){
-    if(at(i)->nbVoisins() != (nb_sommets -1))
+    if(at(i)->nbNeighboors() != (nb_sommets -1))
         return false;
     }
 

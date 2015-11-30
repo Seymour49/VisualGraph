@@ -23,7 +23,7 @@ SommetMat::~SommetMat(){
     adjacents.clear();
 }
 
-int SommetMat::nbVoisins() const{
+int SommetMat::nbNeighboors() const{
     int res = 0;
     for(unsigned int i=1;i<adjacents.size();++i){
         if(isArc(i)){

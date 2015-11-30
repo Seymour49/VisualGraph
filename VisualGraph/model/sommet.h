@@ -19,6 +19,14 @@ public:
     int get_id() const { return id; }
 //    virtual std::vector<sommet*>& get_adjacents() const = 0;
 
+    // CARACTERISTIQUES CALCULABLES
+    /**
+     * Retournant le nombre de voisins du sommet
+     * @return nombre de voisins
+     */
+    virtual int nbNeighboors() const =0;
+
+    // AFFICHAGE
     virtual std::ostream& print(std::ostream& out) const = 0;
 
     /**
@@ -29,6 +37,27 @@ public:
       */
      friend std::ostream& operator<<(std::ostream& out, Sommet& r){
           return r.print(out);
+     }
+
+    // METHODES UTILES
+
+
+     /**
+      * Fonction de comparaison selon le nombre de sommets adjacents.
+      * @param Sommet a @param Sommet b
+      * @return a.nbVoisins() > b.nbVoisins()
+      */
+     static bool neighboorsCompare(const Sommet*a, const Sommet*b){
+         return const_cast<Sommet *>(a)->nbNeighboors() > const_cast<Sommet *>(b)->nbNeighboors(); // TODO Ugo : pourquoi const_cast ?
+     }
+
+     /**
+      * Fonction de comparaison selon le nombre de sommets adjacents.
+      * @param Sommet a @param Sommet b
+      * @return nb voisins > nb voisins de l'autre
+      */
+     bool neighboorsCompare(const Sommet* other) const{
+         return nbNeighboors() > other->nbNeighboors();
      }
 };
 

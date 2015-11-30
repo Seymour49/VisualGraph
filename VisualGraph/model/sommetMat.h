@@ -20,22 +20,28 @@ public:
   std::vector<bool> get_MatriceAdjacents() const{ return adjacents; }
 
   /**
-   * Fonction de comparaison selon le nombre de sommets adjacents.
-   * @param Sommet a @param Sommet b
-   * @return a.nbVoisins() > b.nbVoisins()
+   * Retournant le nombre de voisins du sommet
+   * @return nombre de voisins
    */
-  static bool neighboorsCompare(const SommetMat*a, const SommetMat*b){
-      return const_cast<SommetMat *>(a)->nbVoisins() > const_cast<SommetMat *>(b)->nbVoisins(); // TODO Ugo : pourquoi const_cast ?
-  }
+  int nbNeighboors() const;
 
-  /**
-   * Fonction de comparaison selon le nombre de sommets adjacents.
-   * @param Sommet a @param Sommet b
-   * @return a.nbVoisins() > b.nbVoisins()
-   */
-  bool neighboorsCompare(const SommetMat* other) const{
-      return nbVoisins() > (const_cast<SommetMat *>(other)->nbVoisins()); // TODO Ugo : pourquoi const_cast ?
-  }
+//  /**
+//   * Fonction de comparaison selon le nombre de sommets adjacents.
+//   * @param Sommet a @param Sommet b
+//   * @return a.nbVoisins() > b.nbVoisins()
+//   */
+//  static bool neighboorsCompare(const SommetMat*a, const SommetMat*b){
+//      return const_cast<SommetMat *>(a)->nbVoisins() > const_cast<SommetMat *>(b)->nbVoisins(); // TODO Ugo : pourquoi const_cast ?
+//  }
+
+//  /**
+//   * Fonction de comparaison selon le nombre de sommets adjacents.
+//   * @param Sommet a @param Sommet b
+//   * @return a.nbVoisins() > b.nbVoisins()
+//   */
+//  bool neighboorsCompare(const SommetMat* other) const{
+//      return nbVoisins() > (const_cast<SommetMat *>(other)->nbVoisins()); // TODO Ugo : pourquoi const_cast ?
+//  }
 
   /**
    * @brief print
@@ -56,11 +62,5 @@ public:
    * @return vrai si il y a un arc entre le sommet et l'autre sommet
    */
   bool isArc(int id) const { return adjacents.at(id); }
-
-  /**
-   * Retournant le nombre de voisins du sommet
-   * @return nombre de voisins
-   */
-  int nbVoisins() const;
 };
 #endif

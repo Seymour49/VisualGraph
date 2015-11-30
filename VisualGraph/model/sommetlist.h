@@ -26,6 +26,12 @@ public:
     listsommets& get_adjacents(){ return adjacents; }
 
     /**
+     * Retournant le nombre de voisins du sommet
+     * @return nombre de voisins
+     */
+    int nbNeighboors() const;
+
+    /**
      * @brief print
      * @param out
      * @return

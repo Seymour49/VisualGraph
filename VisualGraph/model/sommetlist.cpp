@@ -22,3 +22,12 @@ SommetList::~SommetList()
 {
     adjacents.clear();
 }
+
+/**
+ * Retournant le nombre de voisins du sommet
+ * @return nombre de voisins
+ */
+int SommetList::nbNeighboors() const
+{
+    return adjacents.size();
+}
