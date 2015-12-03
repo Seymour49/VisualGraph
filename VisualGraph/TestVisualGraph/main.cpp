@@ -13,15 +13,21 @@ using namespace std;
  */
 vector<SommetMat *> setIntersection(const vector<SommetMat* > &v1,const vector<SommetMat *> &v2){
     vector<SommetMat *> res;
-    
-    for(unsigned int i = 0; i< v1.size() ; ++i ){
-	for(unsigned int j = 0; j< v2.size(); ++j ){
-	    if( v1.at(i)->get_id() == v2.at(j)->get_id() )
-	      res.push_back(v1.at(i)); 
-	}
+    if(v1.size() == 0 || v2.size() == 0 ){
+	return res;
       
-    }  
-    return res;
+    }
+    else{
+      for(unsigned int i = 0; i< v1.size() ; ++i ){
+	  for(unsigned int j = 0; j< v2.size(); ++j ){
+	      if( v1.at(i)->get_id() == v2.at(j)->get_id() )
+		res.push_back(v1.at(i)); 
+	  }
+	
+      }
+          return res;
+    }
+
 }
 
 vector<SommetMat *> setIntersection(const vector<SommetMat *> &v1,SommetMat* s){
@@ -66,6 +72,58 @@ vector<SommetMat *> setUnion(const vector<SommetMat* > &v1,const vector<SommetMa
     }
 
     return res;
+}
+
+vector<SommetMat* > neighboors(GrapheMat g1, SommetMat * s){
+    vector<SommetMat* > res;
+    
+    for(unsigned int i = 1; i < s->get_MatriceAdjacents().size() ; ++i){
+	if(s->get_MatriceAdjacents().at(i) ){
+	    res.push_back(g1.at(i));
+	}
+    }
+    
+    return res;
+}
+
+vector<SommetMat *> setUnionVS(const vector<SommetMat* > v1,SommetMat *s){
+    vector<SommetMat *> res = v1;  
+    if(setIntersection(res, s).size() == 0)
+	    res.push_back(s);	
+
+    return res;
+  
+}
+
+void deleteSommet(vector<SommetMat *> v, SommetMat* s){
+    for(unsigned int i=0; i < v.size(); ++i){
+	if(v.at(i)->get_id() == s->get_id() ){
+	    v.pop_back();
+	}
+    }
+}
+
+void BK(GrapheMat g, vector<SommetMat *> R, vector<SommetMat *> P, vector<SommetMat *> X){
+    if(P.size() == 0 && X.size() == 0){
+	  cout << "Clique Maximal détectée" << endl;
+	  for(auto n : R ){
+	      cout << *n ;
+	  }
+    }
+    else{
+	cout << "Il est passé par ici" << endl;
+	for(auto n : P){
+	   vector<SommetMat* >  v1 =setUnionVS(R,n);
+	   vector<SommetMat* > v2 =setIntersection(P,neighboors(g,n));
+	   vector<SommetMat* > v3 =setIntersection(X, neighboors(g,n));
+	   cout << "Il repassera par la" << endl;
+	    BK(g,v1, v2, v3);
+	    X = setUnionVS(X,n);
+	    deleteSommet(P,n);
+	  
+	}
+      
+    }
 }
 
 
@@ -191,23 +249,45 @@ int main(int argc, char **argv) {
     /*
      * Test intersection
      */
+    /*
     if(testIntersection(argc,argv,g1))
 	cout << "Fin de test Intersection : Succès" << endl;
     else
 	cout << "Fin de test Intersection : Echec" << endl;
-
+    */
     /**
      * Test Union : Fonctionne à priori, demande de vérification de l'algo pour Flo par Ugo
      */
+    /*
      GrapheMat* g2 = new GrapheMat("Test2");
      if(testUnion(g1,g2))
 	cout << "Fin test Union : Succès" << endl;
      else
 	cout << "Fin test Union : Echec" << endl;
      
+     delete(g2);
      
+     */
+     
+     
+     /**
+      * Test BK
+      * 
+      */
+     if( g1->tryLoadFile("../model/testGraphe25.txt") ){
+	   vector<SommetMat* >  R;
+	   vector<SommetMat* > P;
+	   vector<SommetMat* > X;
+	   
+	   for(unsigned i = 1; i < g1->size() ; ++ i){
+	      P.push_back(g1->at(i));
+	   }
+	   
+	   BK(*g1,R,P,X);
+       
+     }
       delete(g1);
-      delete(g2);
+
     
     string dummy;
     cin >>dummy;
