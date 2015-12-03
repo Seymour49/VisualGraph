@@ -91,14 +91,13 @@ vector<SommetMat *> setUnionVS(const vector<SommetMat* > v1,SommetMat *s){
     if(setIntersection(res, s).size() == 0)
 	    res.push_back(s);	
 
-    return res;
-  
+    return res; 
 }
 
 void deleteSommet(vector<SommetMat *> v, SommetMat* s){
-    for(unsigned int i=0; i < v.size(); ++i){
-	if(v.at(i)->get_id() == s->get_id() ){
-	    v.pop_back();
+    for(vector<SommetMat*>::iterator it (v.begin()); it != v.end(); ++it){
+	if( (*it)->get_id() == s->get_id() ){
+	    v.erase(it);
 	}
     }
 }
@@ -120,7 +119,6 @@ void BK(GrapheMat g, vector<SommetMat *> R, vector<SommetMat *> P, vector<Sommet
 	    BK(g,v1, v2, v3);
 	    X = setUnionVS(X,n);
 	    deleteSommet(P,n);
-	  
 	}
       
     }
@@ -198,9 +196,8 @@ bool testIntersection(int argc, char** argv, GrapheMat* g){
 }
 
 
-bool testUnion(GrapheMat* g1, GrapheMat* g2){
-    
-
+bool testUnion(GrapheMat* g1, GrapheMat* g2)
+{
     if( g1->tryLoadFile("../model/testGraphe25.txt") ){
 	if( g2->tryLoadFile("../model/testGraphe.txt")){
 	  
@@ -212,8 +209,7 @@ bool testUnion(GrapheMat* g1, GrapheMat* g2){
 	  for(int i=1; i <= g2->getNbSommets(); ++i)
 	      v2.push_back(g2->at(i));
 	  
-	  
-	  
+
 	  vector<SommetMat* > v3= setUnion(v1,v2);
 	  
 	  for(auto n : v3)
@@ -227,14 +223,12 @@ bool testUnion(GrapheMat* g1, GrapheMat* g2){
 	return false;
     }
   
-  
- 
     return true;
 }
 
 
-int main(int argc, char **argv) {
-
+int main(int argc, char **argv)
+{
     GrapheMat* g1 = new GrapheMat("Test");
      /**
      * Test de chargement 
@@ -268,7 +262,6 @@ int main(int argc, char **argv) {
      delete(g2);
      
      */
-     
      
      /**
       * Test BK
