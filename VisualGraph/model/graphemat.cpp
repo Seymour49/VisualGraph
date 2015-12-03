@@ -46,6 +46,28 @@ ostream& GrapheMat::print(ostream& out) const
     return out;
 }
 
+// OPERATIONS
+GrapheMat* GrapheMat::add(SommetMat* sommet)
+{
+    int id =sommet->get_id();
+
+    for (SommetMat* other : *this){
+        if (other->get_id() == id) return this;
+    }
+    return this;
+}
+
+vector<SommetMat*>* GrapheMat::getAdjacents(SommetMat *sommet) const
+{
+    vector<SommetMat*>* adjacents= new vector<SommetMat*>;
+    for (int i= 1; i< nb_sommets; ++i) {
+        if (sommet->isArc(i)) adjacents->push_back(at(i));
+    }
+    return adjacents;
+}
+
+// AUTRES
+
 void GrapheMat::initSommets()
 {
     SommetMat *s = new SommetMat(0,0);
@@ -57,6 +79,41 @@ void GrapheMat::initSommets()
         SommetMat* tmp = new SommetMat(i, size_t(nb_sommets));
         push_back(tmp);
     }
+}
+
+bool GrapheMat::contains(int id) const
+{
+    for(SommetMat* s : *this){
+        if(s->get_id()== id) return true;
+    }
+    return false;
+}
+
+/**
+ * Fonction d'intersection entre deux vecteurs de sommets.
+ * @param const_vector<T*> v1 @param const_vector<T*> v2
+ * @return vector<T*>
+ */
+vector<SommetMat *>& GrapheMat::intersection(const vector<SommetMat* > &v1, const vector<SommetMat *> &v2) const
+{
+    vector<SommetMat *>* res= new vector<SommetMat *>;
+    cout << "\tIntersection de v1["<< v1.size()<< "] et v2["<< v2.size()<<"] "<< endl;
+
+    if(v1.size() == 0 || v2.size() == 0 ){
+        cout << "\t\tIntersection vide"<< endl;
+    } else {
+        cout << "\t\tIntersection des vecteurs"<< endl;
+        for(SommetMat* s1 : v1){
+            for(SommetMat* s2 : v2){
+                if( s1->get_id() == s2->get_id() ){
+                    cout << "\t\t\tSommet '"<<s2->get_id()<<"' commun"<< endl;
+                    res->push_back(s1);
+                }
+            }// FIN 1ere boucle for
+        }// FIN 2eme boucle for
+    }
+
+    return *res;
 }
 
 bool GrapheMat::tryLoadFile(const string& fileName)
@@ -100,9 +157,6 @@ bool GrapheMat::tryLoadFile(const string& fileName)
             delete(&tokens);
             }
         }
-
-        // On trie le graphe selon le nombre décroissant de voisins
-//        sort(this->begin(), this->end(), SommetMat::neighboorsCompare);
     }
     return true;
     

@@ -20,10 +20,11 @@ GrapheMat* algoGrapheMat::BronKerbosch(GrapheMat const* G)
 
     GrapheMat* cliqueInit= new GrapheMat("Clique Maximale de "+ G->getName());
 
-    vector<SommetMat*>* consideredVertices= new vector<SommetMat*>;
     SommetMat* sommetInitial= G->at(1); // TODO choisir un sommet initial pour commencer la recherche de clique
-    consideredVertices->push_back(sommetInitial);
-    consideredVertices= adjacents(consideredVertices); // TODO créer la fonctions qui retourne les sommets tous adjacents à un vector<SommetMat*>
+    vector<SommetMat*>& consideredVertices = *(G->getAdjacents(sommetInitial)); //version avec les adjacents à un seul sommet
+    consideredVertices.push_back(sommetInitial);
+//    consideredVertices.push_back(sommetInitial);
+//    consideredVertices= G->adjacents(consideredVertices); // TODO créer la fonctions qui retourne les sommets tous adjacents à un vector<SommetMat*>
 
     return maxCliqueBronKerbosch(G, cliqueInit, consideredVertices);
 }
@@ -37,28 +38,32 @@ GrapheMat* algoGrapheMat::BronKerbosch(GrapheMat const* G)
 GrapheMat* algoGrapheMat::maxCliqueBronKerbosch(GrapheMat const* G, GrapheMat* clique, vector<SommetMat*> const& considered)
 {
     cout << "recherche clique maximale de "<< G->getName()<< endl;
-    if (considered.empty()){
+    if (considered.empty() && clique->size()>1){
         /*noter la clique maximale K*/
         cout << "clique maximale trouvée  : "<< (*clique)<< endl;
-        return clique;
     }
     else {
         // On cherche la clique maximale pour chaque sommet considéré
-        for (SommetMat* sommet : considered){ // TODO passer en C++11
-            if (!clique->contient(sommet)) { // TODO créer la fonction contient dans GrapheMat qui cherche si le graphe contient le sommet
+        for (SommetMat* sommet : considered) {
+            if (!clique->contains(sommet->get_id())) {
                 GrapheMat* copieClique= new GrapheMat(*clique); //TODO créer constructeur par recopie
-                // TODO détruire les copies créer de cliques, sinon fuite mémoire
-                copieClique->push_back(sommet);
+                                                               // TODO plus tard détruire les copies créer de cliques, sinon fuite mémoire
+                copieClique= copieClique->add(sommet);
 
-                vector<SommetMat*> copieConsidered= considered;
-            // TODO créer la fonction intersection(vector<SommetMat*>& C, ...) std::vector<bool>& ? ou créer fonction qui retourne vector<SommetMat*>
-    //            vector<SommetMat*>& = intersection(C, sommet->get_adjacents());
+            // TODO créer la fonction intersection(vector<SommetMat*>& C, ...)
+                vector<SommetMat*> newConsidered = G->intersection(considered, *(G->getAdjacents(sommet)));
 
-                maxCliqueBronKerbosch(G, clique, copieConsidered);
+                GrapheMat* newClique= maxCliqueBronKerbosch(G, copieClique, newConsidered);
+                if (newClique->size() > clique->size()){
+                    delete clique;
+                    clique= newClique;
+                    cout << "Clique plus grande trouvée : "<< (*clique)<< endl;
+                } else {
+                    cout << "La clique maximale trouvée est plus petite que la clique max courante "<< endl;
+                }
             }
         }
-        //TODO sélectionner la meilleure clique
-            // return [CLIQUE_MAX_SELECTIONNE];
+        return clique;
     }
 }
 /*

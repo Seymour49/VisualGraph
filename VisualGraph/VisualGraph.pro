@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = VisualGraph
 TEMPLATE = app
 
+CONFIG += c++11
+
 DEPENDPATH += . model
 INCLUDEPATH += . model
 

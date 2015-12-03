@@ -14,8 +14,6 @@
  * et un vecteur de booleen de taille NbSommet.
  * 
  */
-
-
 class GrapheMat : public std::vector<SommetMat *>{
 private:
   std::string name;
@@ -64,6 +62,24 @@ public:
     friend std::ostream& operator<<(std::ostream& out, GrapheMat& r)
     { return r.print(out); }
 
+// OPERATEURS
+    /**
+     * Union entre un graphe et un sommet, on vérifie que le sommet n'est pas
+     *  déjà dans le graphe avant de l'ajouter
+     * @see une allocation est faite, il faut libérer la mémoire par la suite
+     * @param G graphe
+     * @param sommet
+     * @return union des 2
+     */
+    GrapheMat* add(SommetMat* sommet);
+
+    /**
+     * Retourne les adjacents d'un sommet sous forme d'un vecteur de pointeurs sur SommetMat
+     * @param sommet dont on veut les adjacents
+     * @return un pointeur sur un vecteur contenant les adjacents du sommet
+     */
+    vector<SommetMat*>* getAdjacents(SommetMat* sommet) const;
+
 //  AUTRES
     /**
      * Fonction d'initialisation d'un graphe
@@ -71,10 +87,25 @@ public:
     void initSommets();
 
     /**
+     * Cherche si le graphe contient un sommet donné
+     * @param id id du sommet que l'on cherche dans le graphe
+     * @return vrai si le sommet est dans le graphe
+     */
+    bool contains(int id) const;
+
+    /**
+     * intersection entre 2 vecteur de sommets
+     * @param v1 premier vecteur
+     * @param v2 second vecteur
+     * @return intersection de v1 et v2
+     */
+    std::vector<SommetMat *>& intersection(const std::vector<SommetMat *>& v1, const std::vector<SommetMat *>& v2) const;
+
+    /**
      * Chargement d'un graphe sous forme de matrice
      * à partir d'un fichier d'exemple
      * @param fileName
-     * @return
+     * @return faux si le chargement du fichier échoue
      */
     bool tryLoadFile(const std::string& fileName);
 
