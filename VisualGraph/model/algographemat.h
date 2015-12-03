@@ -5,6 +5,13 @@
 
 #include "../model/graphemat.h"
 
+/**
+ * Classe permettant d'utiliser les algorithmes de recherche de clique maximale, avec des méthodes statiques
+ * TODO mieux utiliser les pointeurs et références ? (@Florian)
+ * TODO faire les versions v2 et v3 (les 2 ?) de BronKerbrosch. Nécessite pas mal de fonctions (intersections et unions)
+ * TODO utiliser des vector<bool/byte> ?
+ * TODO utiliser seulement des graphes au lieux de vector<SommetMat *> (@Florian)
+ */
 class algoGrapheMat
 {
 protected:

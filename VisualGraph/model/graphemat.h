@@ -12,7 +12,10 @@
  * On considère le graphe comme un vecteur de sommet, 
  * chaque sommet étant représenté par un identifiant
  * et un vecteur de booleen de taille NbSommet.
- * 
+ * TODO @see ATTENTION le nb de sommet n'est pas incrémenté avec add() ni push_back() (redéfinir ?),
+ *      il est tjr identique au nombre de sommet total dans le plus grand graphe (père de tous les graphe)
+ * TODO un constructeur par recopie
+ * TODO optimiser ???
  */
 class GrapheMat : public std::vector<SommetMat *>{
 private:
