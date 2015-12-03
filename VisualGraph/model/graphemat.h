@@ -58,6 +58,9 @@ public:
      */
     std::ostream& print(std::ostream& out) const;
 
+    friend std::ostream& operator<<(std::ostream& out, GrapheMat const& r)
+    { return r.print(out); }
+
     friend std::ostream& operator<<(std::ostream& out, GrapheMat& r)
     { return r.print(out); }
 

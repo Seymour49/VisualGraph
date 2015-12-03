@@ -38,7 +38,8 @@ public:
      * @return
      * TODO retirer K des arguements et le mettre en retour de la fonction
      */
-    static GrapheMat* maxCliqueBronKerbosch(GrapheMat const* G, GrapheMat* K, std::vector<SommetMat*>& C, std::vector<SommetMat*>& A);
+    static GrapheMat* maxCliqueBronKerbosch(GrapheMat const* G, GrapheMat * clique, std::vector<SommetMat*> const& considered);
+    static GrapheMat* maxCliqueBronKerboschV2(GrapheMat const* G, GrapheMat* K, std::vector<SommetMat*>& considered, std::vector<SommetMat*>& A);
 };
 
 #endif // ALGOGRAPHEMAT_H
