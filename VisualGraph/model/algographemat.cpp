@@ -40,7 +40,7 @@ GrapheMat* algoGrapheMat::maxCliqueBronKerbosch(GrapheMat const* G, GrapheMat* c
     cout << "recherche clique maximale de "<< G->getName()<< endl;
     if (considered.empty() && clique->size()>1){
         /*noter la clique maximale K*/
-        cout << "clique maximale trouvée  : "<< (*clique)<< endl;
+        cout << "clique maximale trouvée  : "<< (*clique)<< ", de taille : "<< clique->size()<< endl;
     }
     else {
         // On cherche la clique maximale pour chaque sommet considéré
@@ -63,8 +63,8 @@ GrapheMat* algoGrapheMat::maxCliqueBronKerbosch(GrapheMat const* G, GrapheMat* c
                 }
             }
         }
-        return clique;
     }
+    return clique;
 }
 /*
  * Meilleure version :

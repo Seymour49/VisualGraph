@@ -98,5 +98,6 @@ void ShowGraph::resizeEvent(QResizeEvent* event)
 
 void ShowGraph::startBronKerbosch() const
 {
-    algoGrapheMat::BronKerbosch(graph);
+    GrapheMat* g= algoGrapheMat::BronKerbosch(graph);
+    cout<< "plus grande clique max trouvée de taille : "<< g->size()<< endl;
 }

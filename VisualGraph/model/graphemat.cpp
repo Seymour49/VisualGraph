@@ -54,6 +54,7 @@ GrapheMat* GrapheMat::add(SommetMat* sommet)
     for (SommetMat* other : *this){
         if (other->get_id() == id) return this;
     }
+    push_back(sommet);
     return this;
 }
 
