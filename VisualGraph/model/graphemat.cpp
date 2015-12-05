@@ -16,8 +16,10 @@ GrapheMat::GrapheMat(const GrapheMat& g):vector<SommetMat *>(g), name(g.name),nb
 
 GrapheMat::~GrapheMat()
 {
-    for(vector<SommetMat *>::iterator it = this->begin(); it != this->end(); ++it)
-    delete(*it);
+    // @SEE TODO ATTENTION, les conteneur ne supprime pas le contenu, car il peut être
+        // partagé avec un autre conteneur, il faut supprimer les éléments soit-même
+    //for(vector<SommetMat *>::iterator it = this->begin(); it != this->end(); ++it)
+    //delete(*it);
 
     this->clear();
 }
@@ -98,20 +100,26 @@ bool GrapheMat::contains(int id) const
 vector<SommetMat *>& GrapheMat::intersection(const vector<SommetMat* > &v1, const vector<SommetMat *> &v2) const
 {
     vector<SommetMat *>* res= new vector<SommetMat *>;
+#if DEBUG_INTERSECTION
     cout << "\tIntersection de v1["<< v1.size()<< "] et v2["<< v2.size()<<"] "<< endl;
+#endif
 
     if(v1.size() == 0 || v2.size() == 0 ){
         cout << "\t\tIntersection vide"<< endl;
     } else {
-        cout << "\t\tIntersection des vecteurs"<< endl;
         for(SommetMat* s1 : v1){
             for(SommetMat* s2 : v2){
                 if( s1->get_id() == s2->get_id() ){
+#if DEBUG_INTERSECTION
                     cout << "\t\t\tSommet '"<<s2->get_id()<<"' commun"<< endl;
+#endif
                     res->push_back(s1);
                 }
             }// FIN 1ere boucle for
         }// FIN 2eme boucle for
+#if DEBUG_INTERSECTION
+        cout << "\t\t"<< res->size()<< " vecteurs communs"<< endl;
+#endif
     }
 
     return *res;
