@@ -139,6 +139,7 @@ int main(int argc, char **argv) {
     
     if(g->tryLoadFile(argv[1])){
 	cout << *g << endl;
+	
 	if(g->isComplete())
 	    cout << "Complet" << endl;
 	else if(g->isEmpty()) 
@@ -150,8 +151,9 @@ int main(int argc, char **argv) {
 	    cout << "Complet" << endl;
 	else if(P->isEmpty()) 
 	    cout << "Vide" << endl;
-
+	/*
 	GrapheChar *X = new GrapheChar(g->getNbSommet());
+	cout << "X" << endl;
 	cout << *X << endl;
 	if(X->isComplete())
 	    cout << "Complet" << endl;
@@ -159,19 +161,21 @@ int main(int argc, char **argv) {
 	    cout << "Vide" << endl;
 	
 	GrapheChar *R = new GrapheChar(g->getNbSommet());
+	cout << "R" << endl;
 	cout << *R << endl;
 	if(R->isComplete())
 	    cout << "Complet" << endl;
 	else if(R->isEmpty()) 
 	    cout << "Vide" << endl;
 	
+	*/
+	cout << "Test voisins" << endl << P->getNbVoisins(8);
 	
-	cout << "Test voisins" << endl;
+	GrapheChar* V = P->voisins(8);
 	
-	GrapheChar* V = new GrapheChar(P->getNbVoisins(8));
-	V = P->voisins(8);
-	
-	cout << "Affichage des voisins du sommet 8" << endl;
+// 	V = P->voisins(8);
+	/*
+	cout << "Affichage du graphe engendré par les voisins du sommet 8" << endl;
 	
 	for(int i=0; i < P->getNbSommet(); ++i){
 	    if(P->getMatrice()[8][i] == '1' ){
@@ -185,11 +189,13 @@ int main(int argc, char **argv) {
 	
 	cout <<"V a "<< V->getNbSommet() << "sommets " << endl;
 	cout << *V << endl;
-	
+	*/
 	delete(g);
 	delete(P);
-	delete(X);
-	delete(R);
+// 	delete(X);
+// 	delete(R);
+	delete(V);
+
     }
     else{
 	cout << "Erreur de fichier" << endl;      

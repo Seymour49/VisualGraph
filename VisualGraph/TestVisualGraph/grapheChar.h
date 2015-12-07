@@ -135,13 +135,12 @@ public:
     * 
     */
     GrapheChar* voisins(int pos){
-      GrapheChar* res = new GrapheChar(getNbVoisins(pos));
+      GrapheChar* res = new GrapheChar(NbSommets);
       
       for(int i=0; i < res->NbSommets; ++i){
 	  // Si Matrice[pos][i] == '1'  le sommet appartient au voisins de pos 
 	  if( Matrice[pos][i] == '1' ){
-	      char *tmp = Matrice[i];
-	      res->setline(i,tmp);
+	      res->setline(i,Matrice[i]);
 	  }else{
 	      res->initline(i);
 	  }	
