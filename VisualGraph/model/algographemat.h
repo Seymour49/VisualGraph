@@ -41,11 +41,18 @@ public:
     static GrapheMat* biggestClique(const std::list<GrapheMat*>& listCliques);
 
     /**
-     * Démarre l'algorithme de recherche de clique Maximum
+     * Démarre l'algorithme de recherche de clique Maximum avec la 1ere version de BK
      * @param G graphe sur lequel on recherche la clique maximum
      * @return vrai si une clique Maximum est trouvée
      */
     static GrapheMat* BronKerbosch(GrapheMat const* G);
+
+    /**
+     * Démarre l'algorithme de recherche de clique Maximum avec la 2e version de BK
+     * @param G graphe sur lequel on recherche la clique maximum
+     * @return vrai si une clique Maximum est trouvée
+     */
+    static GrapheMat* BronKerboschV2(GrapheMat const* G);
 
     /**
      * @param G graphe dont on cherche la clique maximale,

@@ -59,11 +59,28 @@ GrapheMat* algoGrapheMat::BronKerbosch(GrapheMat const* G)
     list<GrapheMat*> maxCliquesG= maxCliqueBronKerbosch(G, cliqueInit, consideredVertices);
 
     GrapheMat* cliqueMax= biggestClique(maxCliquesG);
-    cout<< "================================"<< endl;
-    cout<< "  La plus grande clique trouvée est de taille : "<< cliqueMax->size()<< endl;
-    cout<< "================================"<< endl;
     return cliqueMax;
 }
+
+GrapheMat* algoGrapheMat::BronKerboschV2(GrapheMat const* G)
+{
+    GrapheMat* cliqueInit= new GrapheMat("Clique de "+ G->getName());
+
+    SommetMat* sommetInitial= G->at(1); // TODO choisir un sommet initial pour commencer la recherche de clique
+    vector<SommetMat*>& consideredVertices = *(G->getAdjacents(sommetInitial)); //version avec les adjacents à un seul sommet
+    consideredVertices.push_back(sommetInitial);
+//    consideredVertices= G->adjacents(consideredVertices); // TODO créer la fonctions qui retourne les sommets tous adjacents à un vector<SommetMat*>
+
+    cliqueInit->add(sommetInitial);
+
+    vector<SommetMat*> candidats= consideredVertices;
+
+    list<GrapheMat*> maxCliquesG= maxCliqueBronKerboschV2(G, cliqueInit, consideredVertices, candidats);
+
+    GrapheMat* cliqueMax= biggestClique(maxCliquesG);
+    return cliqueMax;
+}
+
 /*
  * Version de base, peu performante
 1: function MaxClique(G, K, C)
