@@ -13,11 +13,26 @@ algoGrapheMat::algoGrapheMat(const algoGrapheMat& other)
 
 }
 
+// @see utiliser une variable plutot que 2 return ?
+GrapheMat* algoGrapheMat::maxClique(GrapheMat* C1, GrapheMat* C2){
+    assert(C1 != C2); // Pour éviter de libérer la zone mémoire que l'on va retourner
+    if (C1->size() > C2->size()){
+        delete C2;
+        cout << "Clique plus grande trouvée de taille "<< C1->size()<< endl;
+        return C1;
+    } else {
+        delete C1;
+        cout << "Clique plus grande trouvée de taille "<< C2->size()<< endl;
+        return C1;
+    }
+}
+
 GrapheMat* algoGrapheMat::biggestClique(const std::list<GrapheMat *> &listCliques)
 {
     cout << "recherche clique max parmi " << listCliques.size()<< " cliques"<< endl;
     GrapheMat* max= new GrapheMat("Clique vide pour recherche clique max");
     for (GrapheMat* G: listCliques){
+        // On pourrait utiliser maxClique()
         if (max->size() < G->size()){
             delete max;
             max= G;
@@ -66,9 +81,9 @@ list<GrapheMat*>& algoGrapheMat::maxCliqueBronKerbosch(GrapheMat const* G, Graph
         maxCliques->push_back(clique);
 
         cout << "clique maximale trouvée  : "<< clique->getName()<< ", de taille : "<< clique->size()<< endl;
-    }
-    else {
+    } else {
         // On cherche la clique maximale pour chaque sommet considéré
+        // TODO on pourrait utiliser seulement une clique, et regarder la taille de la nouvelle clique trouvée avec maxClique()
         for (SommetMat* sommet : considered) {
             if (!clique->contains(sommet->get_id())) {
                 cout << "Ajout du sommet "<< sommet->get_id()<< " : ";
@@ -83,19 +98,10 @@ list<GrapheMat*>& algoGrapheMat::maxCliqueBronKerbosch(GrapheMat const* G, Graph
                 maxCliques->push_back(newClique);
 
                 cout << endl;
-
-//                if (newClique->size() > clique->size()){
-//                    delete clique;
-//                    clique= newClique;
-//                    cout << "Clique plus grande trouvée : "<< clique->getName()<< endl;
-//                } else {
-//                    delete newClique;
-//                    cout << "La clique maximale trouvée est plus petite que la clique max courante "<< endl;
-//                }
             }
         }
     }
-//    return clique;
+    // On pourrait retourner biggestClique(*maxCliques)
     return *maxCliques;
 }
 /*
@@ -114,30 +120,42 @@ else 3: while A = ∅ do
     7: end while
 8: end function
 */
-//GrapheMat* algoGrapheMat::maxCliqueBronKerboschV2(GrapheMat const* G, GrapheMat* clique, vector<SommetMat*>& considered, vector<SommetMat*>& A)
-//{
-//    cout << "recherche clique maximale de "<< G->getName()<< endl;
-//    if (considered.empty())	/*noter la clique maximale K*/cout << "clique maximale trouvée  : "<< (*clique);
-//    else	while (A.empty()){
-//            SommetMat* sommet = A.front();
-//            // copie utile ?
-//            GrapheMat copieClique= *clique;
-//            Kprime.push_back(sommet);
+list<GrapheMat*>& algoGrapheMat::maxCliqueBronKerboschV2(GrapheMat const* G, GrapheMat* clique, vector<SommetMat*> const& considered, vector<SommetMat*>& A)
+{
+    cout << considered.size()<< " sommet à considérer pour une clique de taille "<< clique->size()<< endl;
 
-//            // TODO créer la fonction intersection(vector<SommetMat*>& C, ...) std::vector<bool>& ? ou créer fonction qui retourne vector<SommetMat*>
-////            vector<SommetMat*>& Cprime= intersection(C, sommet->get_adjacents());
-////            vector<SommetMat*>& Aprime= intersection(A, sommet->get_adjacents());
-////            //récursion
-////            maxCliqueBronKerbosch(G, &Kprime, Cprime, Aprime);
+    list<GrapheMat*>* maxCliques= new list<GrapheMat*>;
+    maxCliques->push_back(clique);
+    if (considered.empty()){
+        maxCliques->push_back(clique);
 
-//            maxCliqueBronKerbosch(G, &copieClique, C, A);
+        cout << "clique maximale trouvée  : "<< clique->getName()<< ", de taille : "<< clique->size()<< endl;
+    } else {
+        while (!A.empty()){
+            SommetMat* sommet = A.back(); // TODO améliorer le choix du sommet utilisé (comme lors appel)
 
-//            // TODO vérifier que pop_back() supprime l'éléments front()
-//            A.pop_back();
-//		}
+            if (!clique->contains(sommet->get_id())) { // TODO normalement c'est à supprimer, grace aux éléments exclus
+                cout << "Ajout du sommet "<< sommet->get_id()<< " : ";
+                GrapheMat* copieClique= new GrapheMat(*clique); //TODO créer constructeur par recopie
+                copieClique= copieClique->add(sommet);
 
-//	return K;
-//}
+            // TODO créer la fonction intersection(vector<SommetMat*>& C, ...)
+                vector<SommetMat*> adjacents= *(G->getAdjacents(sommet));
+                vector<SommetMat*>& newConsidered = G->intersection(considered, adjacents);
+                vector<SommetMat*>& copieA= G->intersection(A, adjacents);
+
+                cout << "Nombre de sommet considéres passe de "<< considered.size()<< ", à "<< newConsidered.size()<< endl;
+
+                GrapheMat* newClique= biggestClique(maxCliqueBronKerboschV2(G, copieClique, newConsidered, copieA));
+                maxCliques->push_back(newClique);
+
+                cout << endl;
+            }
+            A.pop_back();
+        }
+    }
+    return *maxCliques;
+}
 
 
 /* Amélioration :
