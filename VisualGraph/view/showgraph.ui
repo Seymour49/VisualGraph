@@ -29,6 +29,7 @@
     </property>
     <addaction name="actionBron_Kerbosch"/>
     <addaction name="actionBron_Kerbosch_V2"/>
+    <addaction name="actionBron_Kerbosch_V2_bis"/>
    </widget>
    <addaction name="menuAlgorithm"/>
   </widget>
@@ -46,6 +47,11 @@
   <action name="actionBron_Kerbosch_V2">
    <property name="text">
     <string>Bron-Kerbosch V2</string>
+   </property>
+  </action>
+  <action name="actionBron_Kerbosch_V2_bis">
+   <property name="text">
+    <string>Bron-Kerbosch V2_bis</string>
    </property>
   </action>
  </widget>
@@ -83,9 +89,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionBron_Kerbosch_V2_bis</sender>
+   <signal>triggered()</signal>
+   <receiver>ShowGraph</receiver>
+   <slot>startBronKerboschV2_bis()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>255</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>startBronKerbosch()</slot>
   <slot>startBronKerboschV2()</slot>
+  <slot>startBronKerboschV2_bis()</slot>
  </slots>
 </ui>

@@ -112,3 +112,11 @@ void ShowGraph::startBronKerboschV2() const
     cout<< "  La plus grande clique trouvée est de taille : "<< clique->size()<< endl;
     cout<< "================================"<< endl;
 }
+
+void ShowGraph::startBronKerboschV2_bis() const
+{
+    GrapheMat* clique= algoGrapheMat::BronKerboschV2_bis(graph);
+    cout<< "================================"<< endl;
+    cout<< "  La plus grande clique trouvée est de taille : "<< clique->size()<< endl;
+    cout<< "================================"<< endl;
+}

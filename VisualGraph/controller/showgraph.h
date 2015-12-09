@@ -40,6 +40,7 @@ private:
 public slots:
     void startBronKerbosch() const;
     void startBronKerboschV2() const;
+    void startBronKerboschV2_bis() const;
 
 };
 

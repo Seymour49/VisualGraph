@@ -55,6 +55,13 @@ public:
     static GrapheMat* BronKerboschV2(GrapheMat const* G);
 
     /**
+     * Démarre l'algorithme de recherche de clique Maximum avec la 2e version de BK (de Wikipédia)
+     * @param G graphe sur lequel on recherche la clique maximum
+     * @return vrai si une clique Maximum est trouvée
+     */
+    static GrapheMat* BronKerboschV2_bis(GrapheMat const* G);
+
+    /**
      * @param G graphe dont on cherche la clique maximale,
      * passé en paramètre pour le résultat
      * @param K clique maximale courante
@@ -65,6 +72,7 @@ public:
      */
     static std::list<GrapheMat*>& maxCliqueBronKerbosch  (GrapheMat const* G, GrapheMat* clique, const std::vector<SommetMat *> &considered);
     static GrapheMat* maxCliqueBronKerboschV2(GrapheMat const* G, GrapheMat* clique, const std::vector<SommetMat*>& considered, std::vector<SommetMat*>& A);
+    static GrapheMat* maxCliqueBronKerboschV2_bis(GrapheMat const* G, GrapheMat* clique, std::vector<SommetMat*>& considered, std::vector<SommetMat*>& excluded);
 };
 
 #endif // ALGOGRAPHEMAT_H

@@ -84,33 +84,29 @@ GrapheMat* algoGrapheMat::BronKerboschV2(GrapheMat const* G)
 
     vector<SommetMat*> candidats= consideredVertices;
 
-//    GrapheMat* cliqueMax= biggestClique(maxCliquesG);
     GrapheMat* cliqueMax= maxCliqueBronKerboschV2(G, cliqueInit, consideredVertices, candidats);
     return cliqueMax;
 }
 
 
-//GrapheMat* algoGrapheMat::BronKerboschV2_bis(GrapheMat const* G)
-//{
-//    GrapheMat* cliqueInit= new GrapheMat("Clique de "+ G->getName());
+GrapheMat* algoGrapheMat::BronKerboschV2_bis(GrapheMat const* G)
+{
+    GrapheMat* cliqueInit= new GrapheMat("Clique de "+ G->getName());
 
-//    SommetMat* sommetInitial= G->at(1); // TODO choisir un sommet initial pour commencer la recherche de clique
-//    vector<SommetMat*>& consideredVertices = *(G->getAdjacents(sommetInitial)); //version avec les adjacents à un seul sommet
-//    consideredVertices.push_back(sommetInitial);
-////    consideredVertices= G->adjacents(consideredVertices); // TODO créer la fonctions qui retourne les sommets tous adjacents à un vector<SommetMat*>
+    SommetMat* sommetInitial= G->at(1); // TODO choisir un sommet initial pour commencer la recherche de clique
+    vector<SommetMat*>& consideredVertices = *(G->getAdjacents(sommetInitial)); //version avec les adjacents à un seul sommet
+    consideredVertices.push_back(sommetInitial);
+//    consideredVertices= G->adjacents(consideredVertices); // TODO créer la fonctions qui retourne les sommets tous adjacents à un vector<SommetMat*>
 
-//    cliqueInit->add(sommetInitial);
+    cliqueInit->add(sommetInitial);
 
-//    vector<SommetMat*>* candidats= new vector<SommetMat*>;
+    vector<SommetMat*>* candidats= new vector<SommetMat*>;
 
-////    list<GrapheMat*> maxCliquesG= maxCliqueBronKerboschV2(G, cliqueInit, consideredVertices, candidats);
+    GrapheMat* cliqueMax= maxCliqueBronKerboschV2_bis(G, cliqueInit, consideredVertices, *candidats);
+    delete candidats;
 
-////    GrapheMat* cliqueMax= biggestClique(maxCliquesG);
-//    GrapheMat* cliqueMax= maxCliqueBronKerboschV2(G, cliqueInit, consideredVertices, candidats);
-//    delete candidats;
-
-//    return cliqueMax;
-//}
+    return cliqueMax;
+}
 
 
 /*
@@ -215,6 +211,59 @@ GrapheMat* algoGrapheMat::maxCliqueBronKerboschV2(GrapheMat const* G, GrapheMat*
     return max;
 }
 
+/*
+ * Version Wikipédia
+ * TODO A VERIFIER (surtout if/else et entrée dans la boucle
+ */
+GrapheMat* algoGrapheMat::maxCliqueBronKerboschV2_bis(GrapheMat const* G, GrapheMat* clique, vector<SommetMat*>& considered, vector<SommetMat*>& excluded)
+{
+    cout << considered.size()<< " sommet à considérer pour une clique de taille "<< clique->size()<< endl;
+
+    GrapheMat* max;
+
+    if (considered.empty() && excluded.empty()){
+        max= clique;
+        cout << "clique maximale trouvée  : "<< clique->getName()<< ", de taille : "<< clique->size()<< endl;
+    } else {
+        max= new GrapheMat(*(clique));
+    }
+        while (!considered.empty()){
+            SommetMat* sommet = considered.back(); // TODO améliorer le choix du sommet utilisé (comme lors appel)
+
+            if (!clique->contains(sommet->get_id())) { // TODO normalement c'est à supprimer, grace aux éléments exclus
+                cout << "Ajout du sommet "<< sommet->get_id()<< " : ";
+                GrapheMat* newClique= new GrapheMat(*clique); //TODO créer constructeur par recopie
+                newClique= newClique->add(sommet);
+
+            // TODO créer la fonction intersection(vector<SommetMat*>& C, ...)
+                vector<SommetMat*>* adjacents= G->getAdjacents(sommet);
+                vector<SommetMat*>& newConsidered = G->intersection(considered, *adjacents);
+                vector<SommetMat*>& copieA= G->intersection(excluded, *adjacents);
+
+                cout << "Nombre de sommet considéres passe de "<< considered.size()<< ", à "<< newConsidered.size()<< endl;
+
+                cout << "\ttaille clique avant BK : "<< newClique->size()<< endl;
+                newClique= maxCliqueBronKerboschV2_bis(G, newClique, newConsidered, copieA);
+                cout << "\ttaille trouvée : "<< newClique->size()<< endl;
+
+//                newClique= maxClique(copieClique, newClique);
+                max= maxClique(newClique, max);
+                cout << endl;
+
+                delete &copieA;
+                delete &newConsidered;
+                delete adjacents;
+            }
+            considered.pop_back();
+            excluded.push_back(sommet);
+        }
+//    }
+    delete clique;
+    return max;
+}
+
+
+
 
 /* Amélioration :
  * Utilisation de pivots. Cette nouvelle version ne signale chaque clique maximale qu’une seule fois, ce
@@ -228,6 +277,17 @@ u tous les  ́el ́ements de S sont adjacents `a u. Alors, comme
 u est adjacent `
 a tous les  ́el ́ements de K, on trouve que K ∪ S ∪ {u} est une clique plus grosse, ce qui
 contredit la maximalit ́e de la pr ́ec ́edente. Il en d ́ecoule imm ́ediatement un nouvel algorithme :
+
+VERSION Wikipedia :
+
+   BronKerbosch2(R,P,X):
+       if P and X are both empty:
+           report R as a maximal clique
+       choose a pivot vertex u in P ⋃ X
+       for each vertex v in P \ N(u):
+           BronKerbosch2(R ⋃ {v}, P ⋂ N(v), X ⋂ N(v))
+           P := P \ {v}
+           X := X ⋃ {v}
 
 1: function MaxClique(G,K,C,A) 
 2: if C = ? then noter la clique maximale K else 
