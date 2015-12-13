@@ -51,6 +51,19 @@ GrapheMat* algoGrapheMat::biggestClique(const std::list<GrapheMat *> &listClique
     return max;
 }
 
+/* ==================================*/
+    /*      ALGORITHMES         */
+/* ==================================*/
+
+GrapheMat* algoGrapheMat::AlgoGrowing(const GrapheMat *G)
+{
+    vector<SommetMat*> considered= *G;
+    sort(considered.begin(), considered.end());
+    GrapheMat* clique= maxCliqueGrowing(G, new GrapheMat("Clique de "+ G->getName()), considered);
+    clog<< "Clique de taille "<< clique->size()<< " trouvée"<< endl;
+    return clique;
+}
+
 GrapheMat* algoGrapheMat::BronKerbosch(GrapheMat const* G)
 {
     // On trie le graphe selon le nombre décroissant de voisins
@@ -108,6 +121,19 @@ GrapheMat* algoGrapheMat::BronKerboschV2_bis(GrapheMat const* G)
     return cliqueMax;
 }
 
+GrapheMat* algoGrapheMat::maxCliqueGrowing(const GrapheMat *G, GrapheMat *clique, vector<SommetMat *> &considered)
+{
+    if (considered.empty()){
+        return clique;
+    } else {
+           SommetMat* sommet= considered.front();
+
+           clog << "ajout du sommet "<< sommet->get_id()<< endl;
+           clique->add(sommet);
+           considered= G->intersection(considered, *(G->getAdjacents(sommet)));
+           return maxCliqueGrowing(G, clique, considered);
+    }
+}
 
 /*
  * Version de base, peu performante

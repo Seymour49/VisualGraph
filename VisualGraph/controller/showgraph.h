@@ -42,6 +42,8 @@ public slots:
     void startBronKerboschV2() const;
     void startBronKerboschV2_bis() const;
 
+    void startAlgoGrowing() const;
+
 };
 
 #endif // SHOWGRAPH_H

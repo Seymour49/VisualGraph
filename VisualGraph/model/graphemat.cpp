@@ -92,11 +92,6 @@ bool GrapheMat::contains(int id) const
     return false;
 }
 
-/**
- * Fonction d'intersection entre deux vecteurs de sommets.
- * @param const_vector<T*> v1 @param const_vector<T*> v2
- * @return vector<T*>
- */
 vector<SommetMat *>& GrapheMat::intersection(const vector<SommetMat* > &v1, const vector<SommetMat *> &v2) const
 {
     vector<SommetMat *>* res= new vector<SommetMat *>;

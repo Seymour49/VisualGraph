@@ -98,6 +98,7 @@ public:
 
     /**
      * intersection entre 2 vecteur de sommets
+     *  conserve l'ordre du premier vecteur
      * @param v1 premier vecteur
      * @param v2 second vecteur
      * @return intersection de v1 et v2
