@@ -64,6 +64,24 @@ GrapheMat* algoGrapheMat::AlgoGrowing(const GrapheMat *G)
     return clique;
 }
 
+GrapheMat* algoGrapheMat::AlgoGrowingWithBK(const GrapheMat *G)
+{
+    vector<SommetMat*> consideredVertices= *G;
+    sort(consideredVertices.begin(), consideredVertices.end());
+
+    GrapheMat* cliqueInit= new GrapheMat("Clique de "+ G->getName());
+
+    SommetMat* sommetInitial= consideredVertices.front();
+    cliqueInit->add(sommetInitial);
+
+    consideredVertices = G->intersection(consideredVertices, *(G->getAdjacents(sommetInitial)));
+
+    vector<SommetMat*> candidats= consideredVertices;
+
+    GrapheMat* cliqueMax= maxCliqueMixed(G, cliqueInit, consideredVertices, candidats);
+    return cliqueMax;
+}
+
 GrapheMat* algoGrapheMat::BronKerbosch(GrapheMat const* G)
 {
     // On trie le graphe selon le nombre décroissant de voisins
@@ -288,9 +306,6 @@ GrapheMat* algoGrapheMat::maxCliqueBronKerboschV2_bis(GrapheMat const* G, Graphe
     return max;
 }
 
-
-
-
 /* Amélioration :
  * Utilisation de pivots. Cette nouvelle version ne signale chaque clique maximale qu’une seule fois, ce
 qui est un progr`es. Cependant, elle effectue un appel r ́ecursif par clique, maximale ou non. Pour am ́eliorer
@@ -325,3 +340,51 @@ else 3: let u ? C tel que |C ??(u)| est maximal in
     8: end while
 9: end function
 */
+
+
+
+GrapheMat* algoGrapheMat::maxCliqueMixed(GrapheMat const* G, GrapheMat* clique, vector<SommetMat*> const& considered, vector<SommetMat*>& A)
+{
+    cout << considered.size()<< " sommet à considérer pour une clique de taille "<< clique->size()<< endl;
+
+    GrapheMat* max;
+
+    if (considered.empty()){
+        max= clique;
+        cout << "clique maximale trouvée  : "<< clique->getName()<< ", de taille : "<< clique->size()<< endl;
+    } else {
+        max= new GrapheMat(*(clique));
+        while (!A.empty()){
+            SommetMat* sommet = A.back(); // TODO améliorer le choix du sommet utilisé (comme lors appel)
+
+            if (!clique->contains(sommet->get_id())) { // TODO normalement c'est à supprimer, grace aux éléments exclus
+                cout << "Ajout du sommet "<< sommet->get_id()<< " : ";
+                GrapheMat* newClique= new GrapheMat(*clique); //TODO créer constructeur par recopie
+                newClique= newClique->add(sommet);
+
+                vector<SommetMat*>* adjacents= G->getAdjacents(sommet);
+                vector<SommetMat*>& newConsidered = G->intersection(considered, *adjacents);
+
+                newClique= maxCliqueGrowing(G, newClique, newConsidered);
+//                vector<SommetMat*>& copieA= G->intersection(A, *adjacents);
+
+//                cout << "Nombre de sommet considéres passe de "<< considered.size()<< ", à "<< newConsidered.size()<< endl;
+
+//                cout << "\ttaille clique avant BK : "<< newClique->size()<< endl;
+//                newClique= maxCliqueBronKerboschV2(G, newClique, newConsidered, copieA);
+//                cout << "\ttaille trouvée : "<< newClique->size()<< endl;
+
+//                newClique= maxClique(copieClique, newClique);
+                max= maxClique(newClique, max);
+//                cout << endl;
+
+//                delete &copieA;
+                delete &newConsidered;
+                delete adjacents;
+            }
+            A.pop_back();
+        }
+    }
+    delete clique;
+    return max;
+}

@@ -43,6 +43,7 @@ public slots:
     void startBronKerboschV2_bis() const;
 
     void startAlgoGrowing() const;
+    void startAlgoGrowingWithBK() const;
 
 };
 

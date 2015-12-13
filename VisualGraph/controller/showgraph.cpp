@@ -129,3 +129,11 @@ void ShowGraph::startAlgoGrowing() const
     cout<< "  La plus grande clique trouvée est de taille : "<< clique->size()<< endl;
     cout<< "================================"<< endl;
 }
+
+void ShowGraph::startAlgoGrowingWithBK() const
+{
+    GrapheMat* clique= algoGrapheMat::AlgoGrowingWithBK(graph);
+    cout<< "================================"<< endl;
+    cout<< "  La plus grande clique trouvée est de taille : "<< clique->size()<< endl;
+    cout<< "================================"<< endl;
+}
