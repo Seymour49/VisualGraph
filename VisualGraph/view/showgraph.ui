@@ -50,12 +50,12 @@
   </action>
   <action name="actionBron_Kerbosch_V2">
    <property name="text">
-    <string>Bron-Kerbosch V2</string>
+    <string>Bron-Kerbosch Candidats Autorisés</string>
    </property>
   </action>
   <action name="actionBron_Kerbosch_V2_bis">
    <property name="text">
-    <string>Bron-Kerbosch V2_bis</string>
+    <string>Bron-Kerbosch Candidats Autorisés bis</string>
    </property>
   </action>
   <action name="actionAlgo_Growing">
