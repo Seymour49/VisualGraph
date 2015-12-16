@@ -19,7 +19,7 @@ class algoGrapheMat
 {
 protected:
     GrapheMat const* graph;
-    
+
 public:
     algoGrapheMat(GrapheMat* g);
     algoGrapheMat(const algoGrapheMat& other);
@@ -31,7 +31,7 @@ public:
      * @return l'intersection sous forme d'un vecteur de pointeurs de SommetMat
      */
 //    std::vector<SommetMat*>& intersect(std::vector<SommetMat*>& G1,  std::vector<SommetMat*>& G2);
-    
+
     static GrapheMat* maxClique(GrapheMat* C1, GrapheMat* C2);
 
     /**
@@ -40,6 +40,13 @@ public:
      * @return
      */
     static GrapheMat* biggestClique(const std::list<GrapheMat*>& listCliques);
+
+    /**
+     * Supprime les sommets qui n'ont pas le nombre minimum de voisins
+     * @param sommets liste triées des sommets
+     * @param min_adjacents nombre minimum d'adjacents
+     */
+    static void purge(std::vector<SommetMat *> &sommets, int min_adjacents);
 
     /* ==================================*/
         /*      ALGORITHMES         */
@@ -82,6 +89,16 @@ public:
     static GrapheMat* AlgoGrowingWithBK(GrapheMat const* G);
 
 
+    /**
+     * Démarre l'algorithme de recherche de clique maximale avec
+     *  Growing puis BK sur les sommets T(= taille clique) adjacents minor
+     * @param G graphe sur lequel on recherche la clique maximum
+     * @return clique Maximum trouvée
+     */
+    static GrapheMat* BronKerboschWithGrowing(GrapheMat const* G);
+
+
+    /* === Algos ===*/
     /**
      * Algorithme de recherche d'une clique maximale
      *  à partir des sommets avec le plus d'adjacents (approximation)

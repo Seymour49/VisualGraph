@@ -95,45 +95,58 @@ void ShowGraph::resizeEvent(QResizeEvent* event)
     redraw();
 }
 
+#include <QDialog>
+#include <QVBoxLayout>
+void ShowGraph::showRes(GrapheMat* clique) const
+{
+    cout<< "================================"<< endl;
+    cout<< "  La plus grande clique trouvée est de taille : "<< clique->size()<< endl;
+    cout<< "================================"<< endl;
+    ostringstream oss;
+    oss << "La plus grande clique trouvée est de taille : " << clique->size();
+    QDialog* winRes= new QDialog();
+
+    QVBoxLayout* lay = new QVBoxLayout(winRes);
+    lay->addWidget(new QLabel(QString::fromStdString(oss.str())));
+
+    winRes->show();
+//    delete winRes;
+}
 
 void ShowGraph::startBronKerbosch() const
 {
     GrapheMat* clique= algoGrapheMat::BronKerbosch(graph);
-    cout<< "================================"<< endl;
-    cout<< "  La plus grande clique trouvée est de taille : "<< clique->size()<< endl;
-    cout<< "================================"<< endl;
+    showRes(clique);
 }
 
 
 void ShowGraph::startBronKerboschV2() const
 {
     GrapheMat* clique= algoGrapheMat::BronKerboschV2(graph);
-    cout<< "================================"<< endl;
-    cout<< "  La plus grande clique trouvée est de taille : "<< clique->size()<< endl;
-    cout<< "================================"<< endl;
+    showRes(clique);
 }
 
 void ShowGraph::startBronKerboschV2_bis() const
 {
     GrapheMat* clique= algoGrapheMat::BronKerboschV2_bis(graph);
-    cout<< "================================"<< endl;
-    cout<< "  La plus grande clique trouvée est de taille : "<< clique->size()<< endl;
-    cout<< "================================"<< endl;
+    showRes(clique);
 }
 
 
 void ShowGraph::startAlgoGrowing() const
 {
     GrapheMat* clique= algoGrapheMat::AlgoGrowing(graph);
-    cout<< "================================"<< endl;
-    cout<< "  La plus grande clique trouvée est de taille : "<< clique->size()<< endl;
-    cout<< "================================"<< endl;
+    showRes(clique);
 }
 
 void ShowGraph::startAlgoGrowingWithBK() const
 {
     GrapheMat* clique= algoGrapheMat::AlgoGrowingWithBK(graph);
-    cout<< "================================"<< endl;
-    cout<< "  La plus grande clique trouvée est de taille : "<< clique->size()<< endl;
-    cout<< "================================"<< endl;
+    showRes(clique);
+}
+
+void ShowGraph::startBKWithGrowing() const
+{
+    GrapheMat* clique= algoGrapheMat::BronKerboschWithGrowing(graph);
+    showRes(clique);
 }

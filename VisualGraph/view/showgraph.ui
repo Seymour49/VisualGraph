@@ -33,6 +33,7 @@
     <addaction name="separator"/>
     <addaction name="actionAlgo_Growing"/>
     <addaction name="actionAlgo_Growing_With_BK"/>
+    <addaction name="actionBK_With_Growing"/>
    </widget>
    <addaction name="menuAlgorithm"/>
   </widget>
@@ -65,6 +66,11 @@
   <action name="actionAlgo_Growing_With_BK">
    <property name="text">
     <string>Algo Growing With BK</string>
+   </property>
+  </action>
+  <action name="actionBK_With_Growing">
+   <property name="text">
+    <string>BK With Growing</string>
    </property>
   </action>
  </widget>
@@ -150,6 +156,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionBK_With_Growing</sender>
+   <signal>triggered()</signal>
+   <receiver>ShowGraph</receiver>
+   <slot>startBKWithGrowing()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>255</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>startBronKerbosch()</slot>
@@ -157,5 +179,6 @@
   <slot>startBronKerboschV2_bis()</slot>
   <slot>startAlgoGrowing()</slot>
   <slot>startAlgoGrowingWithBK()</slot>
+  <slot>startBKWithGrowing()</slot>
  </slots>
 </ui>

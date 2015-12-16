@@ -26,6 +26,12 @@ public:
      */
     virtual int nbNeighboors() const =0;
 
+    bool moreNeighboors(Sommet *s1, Sommet *s2);
+
+    bool operator< (Sommet* s2){
+        return moreNeighboors(this, s2);
+    }
+
     // AFFICHAGE
     virtual std::ostream& print(std::ostream& out) const = 0;
 

@@ -51,8 +51,19 @@ GrapheMat* algoGrapheMat::biggestClique(const std::list<GrapheMat *> &listClique
     return max;
 }
 
+void algoGrapheMat::purge(vector<SommetMat *> &sommets, int min_adjacents)
+{
+    reverse(sommets.begin(), sommets.end());
+    clog<< "nb considérés avant : "<< sommets.size()<< endl;
+    while(sommets.back()->nbNeighboors() < min_adjacents){
+        clog<< sommets.back()->nbNeighboors()<< " voisins"<< endl;
+        sommets.pop_back();
+    }
+    clog<< "nb considérés : "<< sommets.size()<< endl;
+}
+
 /* ==================================*/
-    /*      ALGORITHMES         */
+    /*        LANCEURS        */
 /* ==================================*/
 
 GrapheMat* algoGrapheMat::AlgoGrowing(const GrapheMat *G)
@@ -99,6 +110,9 @@ GrapheMat* algoGrapheMat::BronKerbosch(GrapheMat const* G)
     list<GrapheMat*> maxCliquesG= maxCliqueBronKerbosch(G, cliqueInit, consideredVertices);
 
     GrapheMat* cliqueMax= biggestClique(maxCliquesG);
+
+    delete cliqueInit;
+
     return cliqueMax;
 }
 
@@ -139,13 +153,42 @@ GrapheMat* algoGrapheMat::BronKerboschV2_bis(GrapheMat const* G)
     return cliqueMax;
 }
 
+GrapheMat* algoGrapheMat::BronKerboschWithGrowing(GrapheMat const* G)
+{
+    // Tri
+    vector<SommetMat*> consideredFirst= *G;
+    sort(++(consideredFirst.begin()), consideredFirst.end());
+    vector<SommetMat*> consideredVertices= consideredFirst;
+
+    // Recherche basique d'une clique
+    GrapheMat* cliqueMax= maxCliqueGrowing(G, new GrapheMat("Clique de "+ G->getName()), consideredFirst);
+    // Suppression des sommets inutiles parmis ceux graphe, car ils ont moins de voisins que la clique trouvée
+    purge(consideredVertices, cliqueMax->size());
+
+//    vector<SommetMat*>* candidats= consideredVertices;
+    vector<SommetMat*>* candidats= new vector<SommetMat*>;
+
+    // Lancement algo
+    cliqueMax= maxCliqueBronKerboschV2_bis(G, new GrapheMat("Clique de "+ G->getName()), consideredVertices, *candidats);
+
+    delete cliqueMax;
+    delete candidats;
+
+    return cliqueMax;
+}
+
+
+/* ==================================*/
+    /*        ALGORITHMES        */
+/* ==================================*/
 GrapheMat* algoGrapheMat::maxCliqueGrowing(const GrapheMat *G, GrapheMat *clique, vector<SommetMat *> &considered)
 {
     if (considered.empty()){
         return clique;
     } else {
-           SommetMat* sommet= considered.front();
-
+           // On prend le sommet qui a le plus d'adjacents
+           SommetMat* sommet= considered.back();
+           considered.pop_back();
            clog << "ajout du sommet "<< sommet->get_id()<< endl;
            clique->add(sommet);
            considered= G->intersection(considered, *(G->getAdjacents(sommet)));
@@ -154,7 +197,7 @@ GrapheMat* algoGrapheMat::maxCliqueGrowing(const GrapheMat *G, GrapheMat *clique
 }
 
 /*
- * Version de base, peu performante
+ * Version de base, peu performante, visite de tous les noeuds
 1: function MaxClique(G, K, C)
 2: if C = ∅ then noter la clique maximale K
 3: else for each x ∈ C do MaxClique(G, K ∪ {x}, C ∩ Γ(x))
@@ -257,7 +300,6 @@ GrapheMat* algoGrapheMat::maxCliqueBronKerboschV2(GrapheMat const* G, GrapheMat*
 
 /*
  * Version Wikipédia
- * TODO A VERIFIER (surtout if/else et entrée dans la boucle
  */
 GrapheMat* algoGrapheMat::maxCliqueBronKerboschV2_bis(GrapheMat const* G, GrapheMat* clique, vector<SommetMat*>& considered, vector<SommetMat*>& excluded)
 {

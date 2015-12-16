@@ -33,6 +33,7 @@ public:
     // Redéfinition de méthodes
     void paintEvent(QPaintEvent* event);
     void resizeEvent(QResizeEvent* event);
+    void showRes(GrapheMat* clique) const;
 
 private:
     Ui::ShowGraph *ui;
@@ -44,6 +45,7 @@ public slots:
 
     void startAlgoGrowing() const;
     void startAlgoGrowingWithBK() const;
+    void startBKWithGrowing() const;
 
 };
 
