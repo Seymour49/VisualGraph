@@ -16,10 +16,6 @@ GrapheMat::GrapheMat(const GrapheMat& g):vector<SommetMat *>(g), name(g.name),nb
 
 GrapheMat::~GrapheMat()
 {
-    // @SEE TODO ATTENTION, les conteneur ne supprime pas le contenu, car il peut être
-        // partagé avec un autre conteneur, il faut supprimer les éléments soit-même
-    //for(vector<SommetMat *>::iterator it = this->begin(); it != this->end(); ++it)
-    //delete(*it);
 
     this->clear();
 }
@@ -27,6 +23,16 @@ GrapheMat::~GrapheMat()
 /* ======================================= */
                /* Autres */
 /* ======================================= */
+
+void GrapheMat::vider()
+{
+    //TODO ATTENTION, les conteneur ne supprime pas le contenu, car il peut être
+        // partagé avec un autre conteneur, il faut supprimer les éléments soit-même
+    for(vector<SommetMat *>::iterator it = this->begin(); it != this->end(); ++it)
+        delete(*it);
+
+}
+
 vector< string >& GrapheMat::explode(const string& str)
 {
     istringstream split(str);

@@ -44,13 +44,13 @@ void ShowGraph::redraw(){
     if (!bufferPicture->isNull() || bufferPicture == NULL){
         delete(bufferPicture);
     }
-    bufferPicture = new QImage(graph->getNbSommets(), graph->getNbSommets(), QImage::Format_ARGB32);
+    bufferPicture = new QImage(graph->getNbSommets()+1, graph->getNbSommets()+1, QImage::Format_ARGB32);
 
     if (bufferPainter->begin(bufferPicture)) cout << "Debut dessin redraw"<< endl;
     else cout << "Impossible dessiner redraw"<< endl;
 
     bufferPainter->fillRect(0,0, 1,1, QColor(Qt::black));
-    for (int i= 1; i< graph->getNbSommets(); ++i){
+    for (int i= 1; i< graph->getNbSommets()+1; ++i){
         // diagonale peinte en gris
         bufferPainter->fillRect(i,i, 1,1, QColor(Qt::gray));
         // hauteur peinte en bleu
@@ -59,8 +59,8 @@ void ShowGraph::redraw(){
         bufferPainter->fillRect(i,0, 1,1, QColor(Qt::green));
     }
 
-    for (int i= 1; i< graph->getNbSommets(); ++i){
-        for (int j= i+1; j< graph->getNbSommets(); ++j){
+    for (int i= 1; i<= graph->getNbSommets()+1; ++i){
+        for (int j= i+1; j<= graph->getNbSommets()+1; ++j){
             if (graph->at(i)->isArc(j)){
                 bufferPainter->fillRect(i, j, 1, 1,QColor(Qt::red));
                 bufferPainter->fillRect(j, i, 1, 1,QColor(Qt::yellow));
@@ -90,8 +90,8 @@ void ShowGraph::resizeEvent(QResizeEvent* event)
     cout << "test resizeEvent firewidget"<< endl;
     #endif
 
-    scale= min(event->size().width() / (qreal)graph->getNbSommets(), event->size().height() / (qreal)graph->getNbSommets()) ;
-    cout<<"event->size().width()_ "<<event->size().width()<< " event->size().height()_ "<< event->size().height() << " scaling : "<< scale <<"(qreal)graph->getNbSommets() "<<(qreal)graph->getNbSommets() << endl;
+    scale= min(event->size().width() / ((qreal)graph->getNbSommets()+1.0), event->size().height() / ((qreal)graph->getNbSommets()+1.0)) ;
+//    cout<<"event->size().width()_ "<<event->size().width()<< " event->size().height()_ "<< event->size().height() << " scaling : "<< scale <<"(qreal)graph->getNbSommets() "<<(qreal)graph->getNbSommets() << endl;
     redraw();
 }
 
@@ -100,10 +100,10 @@ void ShowGraph::resizeEvent(QResizeEvent* event)
 void ShowGraph::showRes(GrapheMat* clique) const
 {
     cout<< "================================"<< endl;
-    cout<< "  La plus grande clique trouvée est de taille : "<< clique->size()<< endl;
+    cout<< "  La plus grande clique trouvée est de taille : "<< clique->size() +1<< endl;
     cout<< "================================"<< endl;
     ostringstream oss;
-    oss << "La plus grande clique trouvée est de taille : " << clique->size();
+    oss << "La plus grande clique trouvée est de taille : " << clique->size() +1;
     QDialog* winRes= new QDialog();
 
     QVBoxLayout* lay = new QVBoxLayout(winRes);

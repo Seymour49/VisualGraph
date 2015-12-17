@@ -31,6 +31,8 @@ public:
 
     virtual ~GrapheMat();
 
+    void vider();
+
 //  GETTERS
     /**
      * @brief getNbSommets
