@@ -27,13 +27,12 @@
     <property name="title">
      <string>Start Algorithm</string>
     </property>
-    <addaction name="actionBron_Kerbosch"/>
     <addaction name="actionBron_Kerbosch_V2"/>
     <addaction name="actionBron_Kerbosch_V2_bis"/>
     <addaction name="separator"/>
     <addaction name="actionAlgo_Growing"/>
     <addaction name="actionAlgo_Growing_With_BK"/>
-    <addaction name="actionBK_With_Growing"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuAlgorithm"/>
   </widget>
@@ -60,7 +59,7 @@
   </action>
   <action name="actionAlgo_Growing">
    <property name="text">
-    <string>Algo Growing</string>
+    <string>Algo Perso</string>
    </property>
   </action>
   <action name="actionAlgo_Growing_With_BK">
